@@ -22,6 +22,16 @@ Das hier soll deine **WebApp** werden. Das Ziel soll es sein das du am Ende ein 
 Erlaubt sind die Programmiersprachen PHP, JS, SCSS, HTML & MYSQL
 das Memory soll Hauptsächlich aus PHP, HTML und CSS (SCSS) bestehen.
 
+# Hilfreich
+- https://www.php.net
+  - https://www.php.net/manual/de/control-structures.foreach.php
+  - https://www.php.net/manual/de/function.shuffle.php
+- https://www.schattenbaum.net/php/
+  - Erklärt alles sehr gut
+- https://www.w3schools.com/
+  - https://www.w3schools.com/jsref/event_onclick.asp
+  - https://www.w3schools.com/js/js_htmldom_eventlistener.asp
+    - https://www.w3schools.com/jsref/dom_obj_event.asp
 
 # Erweiterungen
 - Mobil Design
