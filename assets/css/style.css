@@ -1,0 +1,49 @@
+h1 {
+  text-align: center;
+}
+
+.wrapper {
+  margin-top: 5rem;
+}
+.wrapper .row {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  perspective: 1000px;
+}
+.wrapper .row .card {
+  height: 200px;
+  width: 200px;
+  background-image: url("../images/memory-bg.jpg");
+  margin: 5px;
+  display: inline-block;
+}
+
+.card-flip {
+  transition: transform 0.8s;
+  transform: rotateY(180deg);
+  transform-style: preserve-3d;
+}
+
+.counter {
+  width: 500px;
+  height: 450px;
+  background-color: grey;
+  position: absolute;
+  top: 10rem;
+  left: 15rem;
+}
+.counter h2 {
+  font-size: 3rem;
+  display: inline-block;
+  margin-bottom: 0;
+}
+.counter .right div,
+.counter .wrong div {
+  height: 100px;
+  background-color: red;
+  width: 100%;
+}
+
+/*# sourceMappingURL=style.css.map */
