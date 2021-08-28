@@ -8,51 +8,14 @@
     <title>Alis Cooles Memory-Spiel</title>
 </head>
 <body>
-    <h1>Ali's coole Memory Game</h1>
-    
-    <div class="wrapper">
+    <h1>Ali's coole Memory Game - Dario Edition</h1>
 
-        <div class="row">
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-        </div>
+    <?php
 
-        <div class="row">
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-        </div>
 
-        <div class="row">
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-        </div>
+    ?>
 
-        <div class="row">
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-        </div>
-
-    </div>
-
-    <div class="counter">
-
-        <div class="right">
-            <h2>Right:</h2>
-            <div></div>
-        </div>
-
-        <div class="wrong">
-            <h2>Wrong:</h2>
-            <div></div>
-        </div>
+    <div class="playground">
 
     </div>
 
