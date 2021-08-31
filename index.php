@@ -10,15 +10,8 @@
 <body>
     <h1>Ali's coole Memory Game - Dario Edition</h1>
 
-    <?php
-
-
-    ?>
-
-    <div class="playground">
-
-    </div>
-
+    <div id="playground"></div>
+    <script type="text/javascript" src="assets/js/data.js"></script>
     <script type="text/javascript" src="assets/js/script.js"></script>
 </body>
 </html>
