@@ -3,7 +3,6 @@ class Memory {
         this.shuffleCards(cards);
         this.setup(cards);
         this.setEventListener(cards);
-
     }
 
     setup(cards) {
@@ -25,20 +24,25 @@ class Memory {
         let cardHtml = '';
         for(let card of cards) {
             cardHtml += `
-            <div class="card card-id-${card.id}">${card.name}</div>
+                <div class="card card-id-${card.id}">${card.name}</div>
             `;
         }
-
         playground.innerHTML = cardHtml;
     }
 
     setEventListener() {
         const playground = this.getHtml()["playground"];
         playground.addEventListener('click', (e) => {
-            console.log(e);
+            // temp
+            if (e.target.className.includes("card")) {
+                if(e.target.style.backgroundColor === "red") {
+                    e.target.style.backgroundColor = "grey";
+                } else {
+                    e.target.style.backgroundColor = "red";
+                }
+            }
+            // temp end
         });
-
-
     }
 
     shuffleCards(arr) {

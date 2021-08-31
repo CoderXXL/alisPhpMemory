@@ -2,11 +2,13 @@
     border: 1px solid black;
     width: 200px;
     height: 200px;
-    margin: 20px;
+    margin: auto;
+    background-color: grey;
 }
 
-body {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+#playground {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 20px;
+    
 }
