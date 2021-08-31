@@ -31,8 +31,11 @@ window.onload = function () {
     }
 }
 
+//TODO compare two cards if they got the same color
+
 /*
 class Card {
+
     cardElement;
 
     constructor(element) {
@@ -44,7 +47,6 @@ class Card {
         this.cardElement.classList.add('card-flip');
     }
 }
-
 
 window.addEventListener('load', () => {
     const cards = document.querySelectorAll('.card');
