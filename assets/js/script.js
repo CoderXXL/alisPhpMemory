@@ -1,7 +1,22 @@
 window.onload = function () {
     const cards = document.querySelectorAll('.card');
-    const color_arr = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', '#E6B333', '#3366E6', '#999966',
-                       '#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', '#E6B333', '#3366E6', '#999966']
+    const color_arr = [
+                '#FF6633',
+                '#FFB399',
+                '#FF33FF',
+                '#FFFF99',
+                '#00B3E6',
+                '#E6B333',
+                '#3366E6',
+                '#999966',
+                '#FF6633',
+                '#FFB399',
+                '#FF33FF',
+                '#FFFF99',
+                '#00B3E6',
+                '#E6B333',
+                '#3366E6',
+                '#999966'];
 
     function shuffle(a) {
         var j, x, i;
@@ -14,20 +29,27 @@ window.onload = function () {
         return a;
     }
 
-    shuffle(color_arr);
+    shuffle(color_arr)
+
+    var elementIsClicked = false;
+    function clickHandler() {
+        elementIsClicked = true;
+    }
 
     // loop through every element in the HTML-collection and add Eventlistener
     for (let card of cards) {
-        card.addEventListener('click', (event) => {
-            card.classList.add('card-flip');
-            card.style.background = 'none';
-            const arrayLength = color_arr.length;
-            for (var i = 0; i < arrayLength; i++) {
-                cards.forEach(function (element, index) {
-                    element.style.backgroundColor = color_arr[i++];
-                });
-            }
-        });
+        if (card.getAttribute('listener') !== 'true') {
+            card.addEventListener('click', (clickHandler) => {
+                const elementClicked = clickHandler.target;
+                elementClicked.setAttribute('listener', 'true');
+                card.classList.add('card-flip');
+                card.style.background = 'none';
+                card.style.backgroundColor = color_arr.pop();
+                if (elementClicked == true) {
+                    cards.removeEventListener('click', clickHandler, false);
+                }
+            });
+        }
     }
 }
 
