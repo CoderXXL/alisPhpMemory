@@ -19,6 +19,7 @@ window.onload = function () {
                 '#999966'];
 
     function shuffle(a) {
+
         var j, x, i;
         for (i = a.length - 1; i > 0; i--) {
             j = Math.floor(Math.random() * (i + 1));
@@ -31,29 +32,43 @@ window.onload = function () {
 
     shuffle(color_arr)
 
-    var elementIsClicked = false;
-    function clickHandler() {
-        elementIsClicked = true;
+    var card_color_arr = []
+
+    function myEvent (event) {
+
+        const card = event.target;
+
+        if (card !== true) {
+            card.removeEventListener('click', myEvent);
+        }
+
+        const current_color = color_arr.pop();
+        card_color_arr.push(current_color);
+
+        if (card_color_arr.length === 2) {
+            if (card_color_arr[0] === card_color_arr[1]) {
+                alert('richtig');
+                card_color_arr.length = 0;
+            } else {
+                color_arr.concat(card_color_arr);
+            }
+        }
+
+        card.classList.add('card-flip');
+        card.style.background = 'none';
+        card.style.backgroundColor = current_color;
+
     }
 
-    // loop through every element in the HTML-collection and add Eventlistener
     for (let card of cards) {
         if (card.getAttribute('listener') !== 'true') {
-            card.addEventListener('click', (clickHandler) => {
-                const elementClicked = clickHandler.target;
-                elementClicked.setAttribute('listener', 'true');
-                card.classList.add('card-flip');
-                card.style.background = 'none';
-                card.style.backgroundColor = color_arr.pop();
-                if (elementClicked == true) {
-                    cards.removeEventListener('click', clickHandler, false);
-                }
-            });
+            card.addEventListener('click', myEvent);
+
         }
     }
 }
 
-//TODO compare two cards if they got the same color
+// (TODO) compare two cards by calling their 'current_color' Attribute
 
 /*
 class Card {
@@ -61,8 +76,8 @@ class Card {
     cardElement;
 
     constructor(element) {
-       this.cardElement = element;
-       this.cardElement.addEventListener('click', this.onClick.bind(this));
+        this.cardElement = element;
+        this.cardElement.addEventListener('click', this.onClick.bind(this));
     }
 
     onClick() {
