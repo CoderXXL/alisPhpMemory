@@ -24,7 +24,14 @@ class Memory {
         let cardHtml = '';
         for(let card of cards) {
             cardHtml += `
-                <div class="card card-id-${card.id}">${card.name}</div>
+            <div class="card" data-id="${card.id}">
+                <div class="inner">
+                    <div class="front">
+                        <img src="${card.img}" alt="${card.name}">
+                    </div>
+                    <div class="back">back</div>
+                </div>
+            </div>
             `;
         }
         playground.innerHTML = cardHtml;
@@ -33,15 +40,8 @@ class Memory {
     setEventListener() {
         const playground = this.getHtml()["playground"];
         playground.addEventListener('click', (e) => {
-            // temp
-            if (e.target.className.includes("card")) {
-                if(e.target.style.backgroundColor === "red") {
-                    e.target.style.backgroundColor = "grey";
-                } else {
-                    e.target.style.backgroundColor = "red";
-                }
-            }
-            // temp end
+            console.log(e);
+            e.target.classList.toggle("flipped");
         });
     }
 
