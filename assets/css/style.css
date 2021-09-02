@@ -1,3 +1,8 @@
+.wrapper {
+    max-width: 1400px;
+    margin: auto;
+}
+
 #playground {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -8,7 +13,8 @@
     background-color: transparent;
     width: 300px;
     height: 300px;
-    perspective: 1000px;
+    perspective: 2000px;
+    margin: auto;
 }
 
 #playground .card .inner {
@@ -16,31 +22,36 @@
     width: 100%;
     height: 100%;
     text-align: center;
-    border: 1px solid #f1f1f1;
     transition: transform 0.8s;
     transform-style: preserve-3d;
+
 }
 
 #playground .card .inner.flipped {
     transform: rotateY(180deg);
 }
 
-#playground .card .inner .front {
-    background-color: #bbb;
+#playground .card .inner.locked {
+    transform: rotateY(180deg);
+}
+
+#playground .card .inner .back {
+    background-image: url('https://www.cranberrycat.com/Myimages/KarenFoster/InLovingMemory/64399_MemoryFrame.jpg');
+    background-position: center center;
+    background-size: 300px;
     width: 300px;
 }
 
-#playground .card .inner .front img {
+#playground .card .inner .back img {
     width: 300px;
     height: 300px;
 }
 
-#playground .card .inner .back {
-    background-color: dodgerblue;
+#playground .card .inner .front {
     transform: rotateY(180deg);
 }
 
-#playground .card .front, #playground .card .back {
+#playground .card .back, #playground .card .front {
     pointer-events: none;
     overflow: hidden;
     position: absolute;
