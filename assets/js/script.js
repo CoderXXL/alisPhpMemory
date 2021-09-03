@@ -77,6 +77,7 @@ class Memory {
                 card.classList.remove("flipped");
               }, 1000);
             }
+            solved = 0;
           }
         }
       }
