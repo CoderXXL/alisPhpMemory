@@ -11,33 +11,113 @@
     <h1>Ali's coole Memory Game</h1>
     
     <div class="wrapper">
-
         <div class="row">
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front"></div>
+                    <div class="card-back"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front"></div>
+                    <div class="card-back"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front"></div>
+                    <div class="card-back"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front"></div>
+                    <div class="card-back"></div>
+                </div>
+            </div>
         </div>
 
         <div class="row">
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front"></div>
+                    <div class="card-back"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front"></div>
+                    <div class="card-back"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front"></div>
+                    <div class="card-back"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front"></div>
+                    <div class="card-back"></div>
+                </div>
+            </div>
         </div>
 
         <div class="row">
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front"></div>
+                    <div class="card-back"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front"></div>
+                    <div class="card-back"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front"></div>
+                    <div class="card-back"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front"></div>
+                    <div class="card-back"></div>
+                </div>
+            </div>
         </div>
 
+
         <div class="row">
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front"></div>
+                    <div class="card-back"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front"></div>
+                    <div class="card-back"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front"></div>
+                    <div class="card-back"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front"></div>
+                    <div class="card-back"></div>
+                </div>
+            </div>
         </div>
 
     </div>

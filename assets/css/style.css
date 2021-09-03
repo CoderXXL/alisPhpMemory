@@ -7,38 +7,55 @@ h1 {
 }
 
 .wrapper .row {
-  width: 100%;
-  margin: 0 auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+.wrapper .row .card {
+  background-color: transparent;
+  width: 200px;
+  height: 200px;
+  border: 1px solid #f1f1f1;
   -webkit-perspective: 1000px;
           perspective: 1000px;
 }
 
-.wrapper .row .card {
-  height: 200px;
-  width: 200px;
-  background-image: url("../images/memory-bg.jpg");
-  background-position: center;
+.wrapper .row .card .card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: -webkit-transform 0.8s;
+  transition: -webkit-transform 0.8s;
+  transition: transform 0.8s;
+  transition: transform 0.8s, -webkit-transform 0.8s;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+}
+
+.wrapper .row .card .card-inner .card-front {
+  background-image: url(../images/memory-bg.jpg);
   -o-object-fit: cover;
      object-fit: cover;
-  margin: 5px;
   display: inline-block;
+  background-position: center;
+}
+
+.wrapper .row .card .card-inner .card-front, .wrapper .row .card .card-inner .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  /* Safari */
+  backface-visibility: hidden;
 }
 
 .card-flip {
-  -webkit-transition: -webkit-transform .8s;
-  transition: -webkit-transform .8s;
-  transition: transform .8s;
-  transition: transform .8s, -webkit-transform .8s;
   -webkit-transform: rotateY(180deg);
           transform: rotateY(180deg);
-  -webkit-transform-style: preserve-3d;
-          transform-style: preserve-3d;
 }
 
 .counter {
