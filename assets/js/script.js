@@ -22,11 +22,12 @@ class Memory {
 
   buildCardsHtml(cards, playground) {
     let cardHtml = "";
-    for (let card of cards) {
+    for (let [index, value] of cards.entries()) {
+      console.log('guckst du:', index, value);
       cardHtml += `
-            <div class="card">
-                <div class="inner" data-id="${card.id}">
-                    <div class="front" style="background-color: ${card.color}"></div>
+            <div class="card fade-in-${index}">
+                <div class="inner" data-id="${value.id}">
+                    <div class="front" style="background-color: ${value.color}"></div>
                     <div class="back"></div>
                 </div>
             </div>
@@ -71,7 +72,11 @@ class Memory {
           }
 
           if(solved === data.length) {
-            alert('Gut gemacht');
+            for (let card of tempArr) {
+              setTimeout(() => {
+                card.classList.remove("flipped");
+              }, 1000);
+            }
           }
         }
       }

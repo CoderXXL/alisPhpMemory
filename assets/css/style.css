@@ -1,3 +1,12 @@
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 .wrapper {
     max-width: 1400px;
     margin: auto;
@@ -10,11 +19,19 @@
 }
 
 #playground .card {
+    border-radius: 10px;
+    opacity: 0;
     background-color: transparent;
     width: 300px;
     height: 300px;
     perspective: 2000px;
     margin: auto;
+    animation: fadeIn 1s ease-in-out;
+    -webkit-animation: fadeIn 1s ease-in-out;
+    -moz-animation: fadeIn 1s ease-in-out;
+    -o-animation: fadeIn 1s ease-in-out;
+    -ms-animation: fadeIn 1s ease-in-out;
+    animation-fill-mode: forwards;
 }
 
 #playground .card .inner {
@@ -24,7 +41,7 @@
     text-align: center;
     transition: transform 0.8s;
     transform-style: preserve-3d;
-
+    border-radius: 10px;
 }
 
 #playground .card .inner.flipped {
@@ -36,7 +53,8 @@
 }
 
 #playground .card .inner .back {
-    background-image: url('https://www.cranberrycat.com/Myimages/KarenFoster/InLovingMemory/64399_MemoryFrame.jpg');
+    border-radius: 10px;
+    background-image: url('../../assets/images/back.jpg');
     background-position: center center;
     background-size: 300px;
     width: 300px;
@@ -51,7 +69,9 @@
     transform: rotateY(180deg);
 }
 
-#playground .card .back, #playground .card .front {
+#playground .card .back,
+#playground .card .front {
+    border-radius: 10px;
     pointer-events: none;
     overflow: hidden;
     position: absolute;
@@ -59,4 +79,51 @@
     height: 300px;
     -webkit-backface-visibility: hidden; /* Safari */
     backface-visibility: hidden;
-  }
+}
+
+.fade-in-1 {
+    animation-delay: 0.2s !important;
+}
+.fade-in-2 {
+    animation-delay: 0.4s !important;
+}
+.fade-in-3 {
+    animation-delay: 0.6s !important;
+}
+.fade-in-4 {
+    animation-delay: 0.7s !important;
+}
+.fade-in-5 {
+    animation-delay: 0.8s !important;
+}
+.fade-in-6 {
+    animation-delay: 1s !important;
+}
+.fade-in-7 {
+    animation-delay: 1.2s !important;
+}
+.fade-in-8 {
+    animation-delay: 1.4s !important;
+}
+.fade-in-9 {
+    animation-delay: 1.6s !important;
+}
+
+.fade-in-10 {
+    animation-delay: 1.8s !important;
+}
+.fade-in-11 {
+    animation-delay: 2s !important;
+}
+.fade-in-12 {
+    animation-delay: 2.2s !important;
+}
+.fade-in-13 {
+    animation-delay: 2.4s !important;
+}
+.fade-in-14 {
+    animation-delay: 2.6s !important;
+}
+.fade-in-15 {
+    animation-delay: 2.8s !important;
+}
