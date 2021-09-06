@@ -124,14 +124,14 @@
 
     <div class="counter">
 
-        <div class="right">
+        <div id="right">
             <h2>Right:</h2>
-            <div></div>
+            <div>0</div>
         </div>
 
-        <div class="wrong">
+        <div id="wrong">
             <h2>Wrong:</h2>
-            <div></div>
+            <div>0</div>
         </div>
 
     </div>

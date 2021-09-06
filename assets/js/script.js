@@ -3,22 +3,11 @@ window.onload = function () {
     const cards = document.querySelectorAll('.card');
 
     const color_arr = [
-        '#FF6633',/*'#FF6633','#FF6633','#FF6633','#FF6633','#FF6633','#FF6633','#FF6633','#FF6633','#FF6633','#FF6633','#FF6633','#FF6633','#FF6633','#FF6633','#FF6633',*/
-        '#FFB399',
-        '#FF33FF',
-        '#FFFF99',
-        '#00B3E6',
-        '#E6B333',
-        '#3366E6',
-        '#999966',
-        '#FF6633',
-        '#FFB399',
-        '#FF33FF',
-        '#FFFF99',
-        '#00B3E6',
-        '#E6B333',
-        '#3366E6',
-        '#999966'];
+        '#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', '#E6B333', '#3366E6', '#999966',
+        '#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', '#E6B333', '#3366E6', '#999966'
+        /*'#FF6633', '#FF6633', '#FF6633', '#FF6633', '#FF6633', '#FF6633', '#FF6633', '#FF6633',
+        '#FF6633', '#FF6633', '#FF6633', '#FF6633', '#FF6633', '#FF6633', '#FF6633', '#FF6633'*/
+    ];
 
     function shuffle(a) {
 
@@ -35,72 +24,80 @@ window.onload = function () {
     shuffle(color_arr)
 
     var card_color_arr = [];
-    var card_arr = []
-
-    //card.getAttribute('listener') === true;
+    var card_arr = [];
+    var right_counter = 1;
+    var wrong_counter = 1;
 
     function onCardClick(event) {
+        function flip() {
+            this.classList.toggle('card-flip');
+        }
+
+        for (var flip_card in cardInner){
+            flip_card.addEventListener('click', flip);
+        }
+
+
         const cardInner = event.target.parentElement;
-        const CardBack = event.target;
+        const card_wrapper = cardInner.parentElement;
+        const card = event.target;
 
         event.currentTarget.removeEventListener('click', onCardClick);
-        
+        const right = document.querySelector('#right > div');
+        const wrong = document.querySelector('#wrong > div');
 
-        //const ChildCard = event.target;
-        console.log(CardBack)
-        //card.getAttribute('listener') == true;
-
-        //debugger;
+        debugger;
         const current_color = color_arr.pop();
         card_color_arr.push(current_color);
-        //CardBack.removeEventListener('click', myEvent);
-
-        //card.removeEventListener('click', myEvent);
 
         if (card_color_arr.length === 2) {
             if (card_color_arr[0] === card_color_arr[1]) {
-                alert("richtig");
+                right.innerHTML = right_counter;
                 console.log(card_color_arr)
                 card_color_arr.length = 0;
             }
             else {
+                wrong.innerHTML = wrong_counter;
+                wrong_counter++;
                 color_arr.concat(card_color_arr);
                 card_color_arr.length = 0;
             }
         }
 
-        cardInner.classList.add('card-flip');
-        cardInner.style.backgroundColor = current_color;
+/*         function flip() {
+            this.classList.toggle('card-flip');
+        }
+
+        for (var flip_card in cardInner)
+        cardInner.addEventListener('click', flip);
+ */
+        //cardInner.classList.add(flip());
+        card.style.backgroundColor = current_color;
 
     }
+
 
     for (let card of cards) {
         if (card.getAttribute('listener') !== 'true') {
             card.addEventListener('click', onCardClick);
+            //card.addEventListener('click', flip);
             console.log("card outside onclick", card)
 
         }
     }
-
 }
-
-//TODO compare two cards by calling their 'current_color' Attribute
 
 /*
 class Card {
-
     cardElement;
-
     constructor(element) {
         this.cardElement = element;
         this.cardElement.addEventListener('click', this.onClick.bind(this));
     }
-
     onClick() {
         this.cardElement.classList.add('card-flip');
     }
 }
-
 window.addEventListener('load', () => {
     const cards = document.querySelectorAll('.card');
     for (let card of cards) {
