@@ -31,10 +31,8 @@ h1 {
   position: relative;
   width: 100%;
   height: 100%;
-  -webkit-transition: -webkit-transform 0.8s;
-  transition: -webkit-transform 0.8s;
-  transition: transform 0.8s;
-  transition: transform 0.8s, -webkit-transform 0.8s;
+  -webkit-transition: all 0.8s ease;
+  transition: all 0.8s ease;
   -webkit-transform-style: preserve-3d;
           transform-style: preserve-3d;
 }
@@ -45,21 +43,12 @@ h1 {
      object-fit: cover;
   display: inline-block;
   background-position: center;
-  -webkit-transform: rotateX(0deg);
-          transform: rotateX(0deg);
-}
-
-.wrapper .row .card .card-inner .card-back {
-  -webkit-transform: rotateY(180deg);
-          transform: rotateY(180deg);
 }
 
 .wrapper .row .card .card-inner .card-front, .wrapper .row .card .card-inner .card-back {
   position: absolute;
   width: 100%;
   height: 100%;
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
 }
 
 .card-inner.card-flip {
@@ -68,12 +57,12 @@ h1 {
 }
 
 .counter {
-  width: 500px;
-  height: 450px;
+  width: 15rem;
+  height: 25rem;
   background-color: grey;
   position: absolute;
   top: 10rem;
-  left: 15rem;
+  left: 10%;
 }
 
 .counter h2 {
@@ -82,10 +71,12 @@ h1 {
   margin-bottom: 0;
 }
 
-.counter .right div,
-.counter .wrong div {
-  height: 100px;
+.counter #right p,
+.counter #wrong p {
+  height: 100%;
   background-color: red;
   width: 100%;
+  font-size: 50px;
+  margin: 35px auto auto 0px;
 }
 /*# sourceMappingURL=style.css.map */

@@ -28,32 +28,25 @@ window.onload = function () {
     var right_counter = 1;
     var wrong_counter = 1;
 
-    function onCardClick(event) {
-        function flip() {
-            this.classList.toggle('card-flip');
-        }
-
-        for (var flip_card in cardInner){
-            flip_card.addEventListener('click', flip);
-        }
-
+    function onCardClick(event){
 
         const cardInner = event.target.parentElement;
         const card_wrapper = cardInner.parentElement;
         const card = event.target;
 
         event.currentTarget.removeEventListener('click', onCardClick);
-        const right = document.querySelector('#right > div');
-        const wrong = document.querySelector('#wrong > div');
+        const right = document.querySelector('#right > p');
+        const wrong = document.querySelector('#wrong > p');
 
-        debugger;
+        //debugger;
         const current_color = color_arr.pop();
         card_color_arr.push(current_color);
 
         if (card_color_arr.length === 2) {
             if (card_color_arr[0] === card_color_arr[1]) {
                 right.innerHTML = right_counter;
-                console.log(card_color_arr)
+                right_counter++;
+                console.log(card_color_arr);
                 card_color_arr.length = 0;
             }
             else {
@@ -71,7 +64,7 @@ window.onload = function () {
         for (var flip_card in cardInner)
         cardInner.addEventListener('click', flip);
  */
-        //cardInner.classList.add(flip());
+        cardInner.classList.add('card-flip');
         card.style.backgroundColor = current_color;
 
     }

@@ -23,7 +23,7 @@ h1 {
                 position: relative;
                 width: 100%;
                 height: 100%;
-                transition: transform 0.8s;
+                transition: all 0.8s ease;
                 transform-style: preserve-3d;
 
                 .card-front {
@@ -31,18 +31,13 @@ h1 {
                     object-fit: cover;
                     display: inline-block;
                     background-position: center;
-                    transform: rotateX(0deg);
-                }
-
-                .card-back {
-                    transform: rotateY(180deg);
+                    
                 }
 
                 .card-front, .card-back {
                     position: absolute;
                     width: 100%;
                     height: 100%;
-                    backface-visibility: hidden;
                 }
             }
         }
@@ -54,12 +49,12 @@ h1 {
 }
 
 .counter {
-    width: 500px;
-    height: 450px;
+    width: 15rem;
+    height: 25rem;
     background-color: grey;
     position: absolute;
     top: 10rem;
-    left: 15rem;
+    left: 10%;
 
     h2 {
         font-size: 3rem;
@@ -67,13 +62,15 @@ h1 {
         margin-bottom: 0;
     }
 
-    .right,
-    .wrong{
+    #right,
+    #wrong{
 
-        div {
-            height: 100px;
+        p {
+            height: 100%;
             background-color: red;
             width: 100%;
+            font-size: 50px;
+            margin: 35px auto auto 0px;
         }
     }
 }

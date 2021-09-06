@@ -126,19 +126,16 @@
 
         <div id="right">
             <h2>Right:</h2>
-            <div>0</div>
+            <p>0</p>
         </div>
 
         <div id="wrong">
             <h2>Wrong:</h2>
-            <div>0</div>
+            <p>0</p>
         </div>
 
     </div>
 
-    <?php
-
-    ?>
 
     <script type="text/javascript" src="assets/js/script.js"></script>
 </body>
