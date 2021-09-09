@@ -1,4 +1,12 @@
 class Memory {
+  constructor() {
+    this.locked = false;
+    this.cardsEqual = false;
+    this.counter = 0;
+    this.solved = 0;
+    this.tempArr = [];
+  }
+
   init(cards) {
     shuffleCards(cards);
     this.setup(cards);
@@ -23,7 +31,6 @@ class Memory {
   buildCardsHtml(cards, playground) {
     let cardHtml = "";
     for (let [index, value] of cards.entries()) {
-      console.log('guckst du:', index, value);
       cardHtml += `
             <div class="card fade-in-${index}">
                 <div class="inner" data-id="${value.id}">
@@ -38,50 +45,65 @@ class Memory {
 
   setEventListener() {
     const playground = this.getMemoryHtml()["playground"];
-    let counter = 0;
-    let solved = 0;
-    let locked, cardsEqual = false;
-    let tempArr = [];
+    playground.addEventListener("click", (e) => this.cardClicked(e));
+  }
 
-    playground.addEventListener("click", (e) => {
-      if (!locked) {
-        if (
-          !e.target.className.includes("flipped") &&
-          e.target.className.includes("inner")
-        ) {
-          counter++;
-          e.target.classList.add("flipped");
-          tempArr.unshift(e.target);
+  cardClicked(e) {
+    let currCard = e.target;
+    if (!this.isLocked()) {
+      if (
+        !currCard.className.includes("flipped") &&
+        currCard.className.includes("inner")
+      ) {
+        this.counter++;
+        this.adjustFlippedClass(currCard);
+        this.tempArr.unshift(currCard);
 
-          if (counter % 2 === 0) {
-            if (tempArr[0].dataset.id === tempArr[1].dataset.id) {
-              solved++;
-              cardsEqual = true;
-            } else {
-              cardsEqual = false;
+        if (this.counter % 2 === 0) {
+          if (this.tempArr[0].dataset.id === this.tempArr[1].dataset.id) {
+            this.solved++;
+            this.isCardEqual(true);
+          } else {
+            this.isCardEqual(false);
+          }
+
+          this.isLocked(true);
+
+          setTimeout(() => {
+            if (!this.isCardEqual()) {
+              this.adjustFlippedClass(this.tempArr[0], true);
+              this.adjustFlippedClass(this.tempArr[1], true);
             }
+            this.isLocked(false);
+          }, 1000);
+        }
 
-            locked = true;
+        if(this.solved === data.length) {
+          for (let card of this.tempArr) {
             setTimeout(() => {
-              if (!cardsEqual) {
-                tempArr[0].classList.remove("flipped");
-                tempArr[1].classList.remove("flipped");
-              }
-              locked = false;
+              this.adjustFlippedClass(card, true)
             }, 1000);
           }
-
-          if(solved === data.length) {
-            for (let card of tempArr) {
-              setTimeout(() => {
-                card.classList.remove("flipped");
-              }, 1000);
-            }
-            solved = 0;
-          }
+          this.solved = 0;
         }
       }
-    });
+    }
+  }
+
+  adjustFlippedClass(element, remove = false) {
+    if (remove) {
+      element.classList.remove("flipped");
+    } else {
+      element.classList.add("flipped");
+    }
+  }
+
+  isLocked(locked) {
+    return (locked != undefined) ? this.locked = locked : this.locked;
+  }
+
+  isCardEqual(cardsEqual) {
+    return (cardsEqual != undefined) ? this.cardsEqual = cardsEqual : this.cardsEqual;
   }
 }
 
