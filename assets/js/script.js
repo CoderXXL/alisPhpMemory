@@ -1,43 +1,65 @@
-
 class Card {
     constructor(element, color) {
-        this.cardElement = element;
         this.color = color;
+        this.element = element;
+        //this.colorGenerator();
     }
 
-    onClick() {
-        this.cardElement.classList.add('card-flip');
-    }
+/*     colorGenerator() {
+        const cardElements = document.querySelectorAll('.card-back');
+        for (let card of cardElements) {
+            card.style.backgroundColor = this.color;
+        }
+    } */
 
 }
 
 class Board {
     constructor(colors) {
         this.colors = colors;
-        this.deck = this.generateDeck();
-        this.OnClick();
+        this.generateDeck();
+        this.addEventHandler();
+    }
+
+    colorPicker() {
+        return this.colors.pop();
     }
 
     generateDeck() {
         const cardElements = document.querySelectorAll('.card');
         let deck = []
         for (let card of cardElements) {
-            deck.push(new Card(card, this.getRandomColor()));
-            this.shuffle(deck);
+            let currentCard = new Card(card, this.colorPicker());
+            console.log(currentCard);
+            deck.push(currentCard);
+            let cardBack = document.querySelectorAll('.card-back');
+            cardBack.style.backgroundColor = this.colorPicker();
+            //this.shuffle(deck);            
         }
+        console.log(deck)
         return deck;
     }
 
-    OnClick() {
-        var card = this.currentTarget;
-        var board = this.target;
+/*     colorGenerator() {
+        const cardElements = document.querySelectorAll('.card');
+        for (let card of cardElements) {
+            let cardBack = document.querySelector('.card-back')
+            cardBack.style.backgroundColor = this.color;
+        }
+    }  */
+
+    addEventHandler() {
         document.querySelector('#wrapper').addEventListener('click', (event) => {
             var cardInner = event.target.parentElement;
-            if (cardInner.classList.contains('card-inner')) {
-                cardInner.classList.add('card-flip');
+            //var cardFront = event.target.previousSibling
+            var card = event.target;
+            if (card.getAttribute('listener') !== 'true') {
+                if (cardInner.classList.contains('card-inner')) {
+                    cardInner.classList.toggle('card-flip');
+                } 
+            //card.setAttribute('listener', 'true');
             }
         });
-        console.log(card)
     }
 
     shuffle(a) {
@@ -51,9 +73,6 @@ class Board {
         return a;
     } 
 
-    getRandomColor() {
-        return this.colors.pop();
-    }
 }
 
 const color_arr = [
@@ -62,6 +81,6 @@ const color_arr = [
 ];
 
 window.addEventListener('load', () => {
-    const CardBoard = new Board(color_arr);
+    new Board(color_arr);
 });
 

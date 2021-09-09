@@ -43,6 +43,8 @@ h1 {
      object-fit: cover;
   display: inline-block;
   background-position: center;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
 }
 
 #wrapper .row .card .card-inner .card-front, #wrapper .row .card .card-inner .card-back {

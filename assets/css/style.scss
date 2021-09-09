@@ -31,6 +31,7 @@ h1 {
                     object-fit: cover;
                     display: inline-block;
                     background-position: center;
+                    backface-visibility: hidden;
                     
                 }
 
