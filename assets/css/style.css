@@ -41,10 +41,13 @@ h1 {
   background-image: url(../images/memory-bg.jpg);
   -o-object-fit: cover;
      object-fit: cover;
-  display: inline-block;
   background-position: center;
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
+  pointer-events: none;
+}
+
+#wrapper .row .card .card-inner .card-back {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
 }
 
 #wrapper .row .card .card-inner .card-front, #wrapper .row .card .card-inner .card-back {

@@ -5,13 +5,6 @@ class Card {
         //this.colorGenerator();
     }
 
-/*     colorGenerator() {
-        const cardElements = document.querySelectorAll('.card-back');
-        for (let card of cardElements) {
-            card.style.backgroundColor = this.color;
-        }
-    } */
-
 }
 
 class Board {
@@ -19,47 +12,6 @@ class Board {
         this.colors = colors;
         this.generateDeck();
         this.addEventHandler();
-    }
-
-    colorPicker() {
-        return this.colors.pop();
-    }
-
-    generateDeck() {
-        const cardElements = document.querySelectorAll('.card');
-        let deck = []
-        for (let card of cardElements) {
-            let currentCard = new Card(card, this.colorPicker());
-            console.log(currentCard);
-            deck.push(currentCard);
-            let cardBack = document.querySelectorAll('.card-back');
-            cardBack.style.backgroundColor = this.colorPicker();
-            //this.shuffle(deck);            
-        }
-        console.log(deck)
-        return deck;
-    }
-
-/*     colorGenerator() {
-        const cardElements = document.querySelectorAll('.card');
-        for (let card of cardElements) {
-            let cardBack = document.querySelector('.card-back')
-            cardBack.style.backgroundColor = this.color;
-        }
-    }  */
-
-    addEventHandler() {
-        document.querySelector('#wrapper').addEventListener('click', (event) => {
-            var cardInner = event.target.parentElement;
-            //var cardFront = event.target.previousSibling
-            var card = event.target;
-            if (card.getAttribute('listener') !== 'true') {
-                if (cardInner.classList.contains('card-inner')) {
-                    cardInner.classList.toggle('card-flip');
-                } 
-            //card.setAttribute('listener', 'true');
-            }
-        });
     }
 
     shuffle(a) {
@@ -72,6 +24,57 @@ class Board {
         }
         return a;
     } 
+
+    colorPicker() {
+        this.shuffle(this.colors);
+        return this.colors.pop();
+    }
+
+    generateDeck() {
+        const cardElements = document.querySelectorAll('.card');
+        let deck = []
+        for (let card of cardElements) {
+            let currentCard = new Card(card, this.colorPicker());
+            deck.push(currentCard);
+            let cardBack = currentCard.element.querySelector('.card-back');
+            cardBack.style.backgroundColor = currentCard.color;
+        }
+        console.log(deck)
+        return deck;
+    }
+/*
+    checkColorOfCards(cardElement) {
+        var cardColor = cardElement.color;
+        var checkCardArray = [];
+        checkCardArray.push(cardColor);
+        console.log(checkCardArray);
+        if  (checkCardArray.length == 2) {
+            if (checkCardArray[0] == checkCardArray[1]) {
+                this.rightCard();
+                checkCardArray = [];
+            } else {
+                this.wrongCard();
+                checkCardArray = [];
+            }
+        } 
+    }
+*/
+    addEventHandler() {
+        document.querySelector('#wrapper').addEventListener('click', (event) => {
+            var cardInner = event.target.parentElement;
+            var card = event.target;
+            var cardBack = card.style.backgroundColor;
+            //this.checkColorOfCards(cardBack);
+            console.log('blub ' + cardBack);
+            if (card.getAttribute('listener') !== 'true') {
+                if (cardInner.classList.contains('card-inner')) {
+                    cardInner.classList.toggle('card-flip');
+                    
+                } 
+                //card.setAttribute('listener', 'true');
+            }
+        });
+    }
 
 }
 
