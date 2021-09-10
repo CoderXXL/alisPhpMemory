@@ -5,42 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="assets/css/style.css">
-    <title>Alis Cooles Memory-Spiel</title>
+    <title>Memory-Spiel</title>
 </head>
 <body>
-    <h1>Ali's coole Memory Game</h1>
+    <h1>Memory Game made by Professional</h1>
+    <h3>more Professionnal then any other professional profesion</h3>
     
-    <div class="wrapper">
+<?php
+    require_once('assets/php/Memory.php');
 
-        <div class="row">
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
+
+    session_start();
+
+
+    if (!isset($_SESSION['memory'])) {
+        $memory = new Memory(8, 2);
+        $_SESSION['memory'] = serialize($memory);
+    } else {
+        $memory = unserialize($_SESSION['memory']);
+    }
+
+
+    $cards = $memory->getCards();
+    $cardsPerRow = $memory->getCardsPerRow();
+    //$pairs = $memory->getPairs();
+
+    $i = 1;
+
+?>
+
+
+<pre>
+    <!-- <?= var_dump($cards) ?>  -->
+    <?= var_dump($_SESSION) ?>
+</pre>
+
+    <div id="memory" class="wrapper">
+
+        <?php foreach ($cards as $card): ?>
+        
+        <?php if ($i === 1): ?>
+            <div class="row">
+        <?php endif; ?>
+
+
+        <div id="<?= $card->getCardId() ?> " class="card">
+            <?= $card->getCardId() ?>
         </div>
 
-        <div class="row">
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-        </div>
+        <?php if ($i >= $cardsPerRow): ?>
+            <?php $i = 1;?>
 
-        <div class="row">
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-        </div>
+            </div>
 
-        <div class="row">
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-        </div>
+        <?php else: ?>
+            <?php $i++; ?>
+        <?php endif; ?>
+
+    
+        <?php endforeach; ?>
 
     </div>
+
+    <form action="assets/php/clear-session.php" method="POST">
+        <input type="submit" value="Restart" />
+    </form>
+
 
     <div class="counter">
 

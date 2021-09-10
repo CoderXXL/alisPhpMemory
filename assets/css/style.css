@@ -2,9 +2,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 5px;
 }
 .wrapper .row {
   display: grid;
+  gap: 5px;
   grid-template-columns: repeat(auto-fill, 1fr);
 }
 
@@ -12,6 +14,9 @@
   height: 200px;
   width: 200px;
   background-image: url("../images/memory-bg.jpg");
+}
+.card.active {
+  border: 2px solid black;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,57 +1,72 @@
-window.onload = function () {
-    const cards = document.querySelectorAll('.card');
-    const color_arr = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', '#E6B333', '#3366E6', '#999966',
-                       '#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', '#E6B333', '#3366E6', '#999966']
 
-    function shuffle(a) {
-        var j, x, i;
-        for (i = a.length - 1; i > 0; i--) {
-            j = Math.floor(Math.random() * (i + 1));
-            x = a[i];
-            a[i] = a[j];
-            a[j] = x;
-        }
-        return a;
+class Memory {
+
+    constructor() {
+        this.start();
     }
 
-    shuffle(color_arr);
+    start()
+    {
+        this.board = document.querySelector('#memory');
+        this.board.addEventListener('click', this.onClick.bind(this));
+    }
 
-    // loop through every element in the HTML-collection and add Eventlistener
-    for (let card of cards) {
-        card.addEventListener('click', (event) => {
-            card.classList.add('card-flip');
-            card.style.background = 'none';
-            const arrayLength = color_arr.length;
-            for (var i = 0; i < arrayLength; i++) {
-                cards.forEach(function (element, index) {
-                    element.style.backgroundColor = color_arr[i++];
-                });
+    onClick(event)
+    {
+        const target = event.target;
+
+        if (
+            !target.classList.contains('card') ||
+            target.classList.contains('active')
+        ) {
+            return;
+        }
+
+        console.log('i was clicked' + target.id);
+        
+
+    
+        this.getCardPairCode(target.id).then(
+            function(jsonResponse){
+                const response = JSON.parse(jsonResponse);
+
+                debugger;
             }
+        );
+    }
+
+    getCardPairCode(cardId)
+    {
+        return this.sendRequest("getCardPairCode", cardId);
+    }
+
+    sendRequest(name, data)
+    {   
+        return new Promise(function (resolve, reject){
+            const req = new XMLHttpRequest();
+    
+            req.open('POST', '/request-handler.php', true);
+    
+            req.setRequestHeader("Content-Type", "application/json");
+    
+            req.onreadystatechange = function() {
+                if(this.readyState === XMLHttpRequest.DONE) {
+                    if(this.status === 200) {
+                        resolve(this.response);
+                    } else {
+                        reject();
+                    }
+                }
+            }
+    
+            const requestData = JSON.stringify({'name': name, 'data': data});
+    
+            req.send(requestData);
+    
+    
         });
     }
 }
 
-//TODO compare two cards if they got the same color
 
-/*
-class Card {
-
-    cardElement;
-
-    constructor(element) {
-       this.cardElement = element;
-       this.cardElement.addEventListener('click', this.onClick.bind(this));
-    }
-
-    onClick() {
-        this.cardElement.classList.add('card-flip');
-    }
-}
-
-window.addEventListener('load', () => {
-    const cards = document.querySelectorAll('.card');
-    for (let card of cards) {
-        new Card(card);
-    }
-});
-*/
+let memory = new Memory();
