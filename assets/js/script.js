@@ -4,7 +4,6 @@ class Card {
         this.element = element;
         //this.colorGenerator();
     }
-
 }
 
 class Board {
@@ -42,40 +41,68 @@ class Board {
         console.log(deck)
         return deck;
     }
-/*
-    checkColorOfCards(cardElement) {
-        var cardColor = cardElement.color;
-        var checkCardArray = [];
-        checkCardArray.push(cardColor);
-        console.log(checkCardArray);
-        if  (checkCardArray.length == 2) {
-            if (checkCardArray[0] == checkCardArray[1]) {
-                this.rightCard();
-                checkCardArray = [];
-            } else {
-                this.wrongCard();
-                checkCardArray = [];
-            }
-        } 
+
+    Sleep(milliseconds) {
+        return new Promise(resolve => setTimeout(resolve, milliseconds));
     }
-*/
+
+    rightCards(cardArray) {
+        cardArray[0].setAttribute('listener', 'true');
+        cardArray[1].setAttribute('listener', 'true');
+    }
+
+    async wrongCards(cardArray) {
+        await this.Sleep(1250);
+        cardArray[0].classList.remove('card-flip');
+        cardArray[1].classList.remove('card-flip');
+    }
+
+    checkColorOfCards(cardElement) {
+        var blub = new Array;
+        var parentCardElement = new Array;
+        for (var i = 0; i < cardElement.length; i++) {
+            var color = cardElement[i].style.backgroundColor;
+            var hallo = cardElement[i].parentElement;
+            parentCardElement.push(hallo);
+            blub.push(color);
+
+            if (parentCardElement.length == 2) {
+                if (cardElement[0].getAttribute('listener') !== 'true' && cardElement[1].getAttribute('listener') !== 'true') {
+                    if (parentCardElement[0].classList.contains('card-inner') && parentCardElement[1].classList.contains('card-inner')) {
+                        parentCardElement[0].classList.add('card-flip');
+                        parentCardElement[1].classList.add('card-flip');
+                        if (blub[0] == blub[1]) {
+                            this.rightCards(cardElement);
+                        } else {
+                            this.wrongCards(parentCardElement);
+                        }
+                    } 
+                    //card.setAttribute('listener', 'true');
+                }
+            }
+        }
+    }
+
     addEventHandler() {
+        var clickedOnCards = new Array
         document.querySelector('#wrapper').addEventListener('click', (event) => {
             var cardInner = event.target.parentElement;
             var card = event.target;
-            var cardBack = card.style.backgroundColor;
-            //this.checkColorOfCards(cardBack);
-            console.log('blub ' + cardBack);
-            if (card.getAttribute('listener') !== 'true') {
+            //var cardBack = card.style.backgroundColor;
+            clickedOnCards.push(card);
+            if (clickedOnCards.length == 2) {
+                this.checkColorOfCards(clickedOnCards);
+                clickedOnCards = [];
+            }
+            //console.log(cardBack);
+/*             if (card.getAttribute('listener') !== 'true') {
                 if (cardInner.classList.contains('card-inner')) {
                     cardInner.classList.toggle('card-flip');
-                    
                 } 
-                //card.setAttribute('listener', 'true');
-            }
+                card.setAttribute('listener', 'true');
+            } */
         });
     }
-
 }
 
 const color_arr = [
