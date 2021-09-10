@@ -51,29 +51,32 @@ class Board {
     }
 
     async wrongCards(cardArray) {
-        await this.Sleep(1250);
+        await this.Sleep(1350);
         cardArray[0].classList.remove('card-flip');
         cardArray[1].classList.remove('card-flip');
     }
 
+    selectedCard(cardArray) {
+        cardArray[0].classList.add('card-flip');
+        cardArray[1].classList.add('card-flip');
+    }
+
     checkColorOfCards(cardElement) {
-        var blub = new Array;
-        var parentCardElement = new Array;
+        var colorOfSelectedCards = new Array;
+        var parentOfCardElementArr = new Array;
         for (var i = 0; i < cardElement.length; i++) {
             var color = cardElement[i].style.backgroundColor;
-            var hallo = cardElement[i].parentElement;
-            parentCardElement.push(hallo);
-            blub.push(color);
-
-            if (parentCardElement.length == 2) {
+            var currentlySelectedParent = cardElement[i].parentElement;
+            parentOfCardElementArr.push(currentlySelectedParent);
+            colorOfSelectedCards.push(color);
+            if (parentOfCardElementArr.length == 2) {
                 if (cardElement[0].getAttribute('listener') !== 'true' && cardElement[1].getAttribute('listener') !== 'true') {
-                    if (parentCardElement[0].classList.contains('card-inner') && parentCardElement[1].classList.contains('card-inner')) {
-                        parentCardElement[0].classList.add('card-flip');
-                        parentCardElement[1].classList.add('card-flip');
-                        if (blub[0] == blub[1]) {
+                    if (parentOfCardElementArr[0].classList.contains('card-inner') && parentOfCardElementArr[1].classList.contains('card-inner')) {
+                        this.selectedCard(parentOfCardElementArr);
+                        if (colorOfSelectedCards[0] == colorOfSelectedCards[1]) {
                             this.rightCards(cardElement);
                         } else {
-                            this.wrongCards(parentCardElement);
+                            this.wrongCards(parentOfCardElementArr);
                         }
                     } 
                 }
