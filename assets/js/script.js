@@ -2,7 +2,6 @@ class Card {
     constructor(element, color) {
         this.color = color;
         this.element = element;
-        //this.colorGenerator();
     }
 }
 
@@ -77,7 +76,6 @@ class Board {
                             this.wrongCards(parentCardElement);
                         }
                     } 
-                    //card.setAttribute('listener', 'true');
                 }
             }
         }
@@ -86,21 +84,12 @@ class Board {
     addEventHandler() {
         var clickedOnCards = new Array
         document.querySelector('#wrapper').addEventListener('click', (event) => {
-            var cardInner = event.target.parentElement;
             var card = event.target;
-            //var cardBack = card.style.backgroundColor;
             clickedOnCards.push(card);
             if (clickedOnCards.length == 2) {
                 this.checkColorOfCards(clickedOnCards);
                 clickedOnCards = [];
             }
-            //console.log(cardBack);
-/*             if (card.getAttribute('listener') !== 'true') {
-                if (cardInner.classList.contains('card-inner')) {
-                    cardInner.classList.toggle('card-flip');
-                } 
-                card.setAttribute('listener', 'true');
-            } */
         });
     }
 }
