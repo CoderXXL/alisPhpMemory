@@ -57,41 +57,50 @@ class Board {
     }
 
     selectedCard(cardArray) {
-        cardArray[0].classList.add('card-flip');
-        cardArray[1].classList.add('card-flip');
+        cardArray.classList.add('card-flip');
     }
 
-    checkColorOfCards(cardElement) {
+    disableClickEvent(element) { 
+        element[0].style.pointerEvents = 'all';
+        element[1].style.pointerEvents = 'all';
+    }
+
+    checkColorOfCards(cardElement, cardElementParent) {
         var colorOfSelectedCards = new Array;
-        var parentOfCardElementArr = new Array;
         for (var i = 0; i < cardElement.length; i++) {
             var color = cardElement[i].style.backgroundColor;
-            var currentlySelectedParent = cardElement[i].parentElement;
-            parentOfCardElementArr.push(currentlySelectedParent);
             colorOfSelectedCards.push(color);
-            if (parentOfCardElementArr.length == 2) {
+            console.log(colorOfSelectedCards);
+            if (colorOfSelectedCards.length == 2) {
                 if (cardElement[0].getAttribute('listener') !== 'true' && cardElement[1].getAttribute('listener') !== 'true') {
-                    if (parentOfCardElementArr[0].classList.contains('card-inner') && parentOfCardElementArr[1].classList.contains('card-inner')) {
-                        this.selectedCard(parentOfCardElementArr);
-                        if (colorOfSelectedCards[0] == colorOfSelectedCards[1]) {
-                            this.rightCards(cardElement);
-                        } else {
-                            this.wrongCards(parentOfCardElementArr);
-                        }
-                    } 
+                    if (colorOfSelectedCards[0] == colorOfSelectedCards[1]) {
+                        this.rightCards(cardElement);
+                    } else {
+                        this.wrongCards(cardElementParent);
+                        this.disableClickEvent(cardElement);
+                    }
                 }
             }
         }
     }
 
     addEventHandler() {
-        var clickedOnCards = new Array
+        var clickedOnCards = new Array;
+        var clickedOnCardsParent = new Array;
         document.querySelector('#wrapper').addEventListener('click', (event) => {
             var card = event.target;
+            var cardParent = card.parentElement;
+            this.selectedCard(cardParent);
+
+            card.style.pointerEvents = 'none'
+            
             clickedOnCards.push(card);
+            clickedOnCardsParent.push(cardParent);
+        
             if (clickedOnCards.length == 2) {
-                this.checkColorOfCards(clickedOnCards);
+                this.checkColorOfCards(clickedOnCards, clickedOnCardsParent);
                 clickedOnCards = [];
+                clickedOnCardsParent = [];
             }
         });
     }
