@@ -91,12 +91,9 @@ class Board {
             var card = event.target;
             var cardParent = card.parentElement;
             this.selectedCard(cardParent);
-
             card.style.pointerEvents = 'none'
-            
             clickedOnCards.push(card);
             clickedOnCardsParent.push(cardParent);
-        
             if (clickedOnCards.length == 2) {
                 this.checkColorOfCards(clickedOnCards, clickedOnCardsParent);
                 clickedOnCards = [];
