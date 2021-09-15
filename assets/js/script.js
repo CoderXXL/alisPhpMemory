@@ -41,26 +41,23 @@ class Board {
         return deck;
     }
 
-    Sleep(milliseconds) {
-        return new Promise(resolve => setTimeout(resolve, milliseconds));
-    }
-
     rightCards(cardArray) {
         cardArray[0].setAttribute('listener', 'true');
         cardArray[1].setAttribute('listener', 'true');
     }
 
-    async wrongCards(cardArray) {
-        await this.Sleep(1350);
-        cardArray[0].classList.remove('card-flip');
-        cardArray[1].classList.remove('card-flip');
+    wrongCards(cardArray) {
+        setTimeout(() => {
+            cardArray[0].classList.remove('card-flip');
+            cardArray[1].classList.remove('card-flip');            
+        }, 1350);
     }
 
-    selectedCard(cardArray) {
+    addFlipAnimation(cardArray) {
         cardArray.classList.add('card-flip');
     }
 
-    disableClickEvent(element) { 
+    enableClickEvent(element) { 
         element[0].style.pointerEvents = 'all';
         element[1].style.pointerEvents = 'all';
     }
@@ -70,14 +67,18 @@ class Board {
         for (var i = 0; i < cardElement.length; i++) {
             var color = cardElement[i].style.backgroundColor;
             colorOfSelectedCards.push(color);
-            console.log(colorOfSelectedCards);
             if (colorOfSelectedCards.length == 2) {
+                const wrapper = document.querySelector('#wrapper')
+                wrapper.style.pointerEvents = 'none'
                 if (cardElement[0].getAttribute('listener') !== 'true' && cardElement[1].getAttribute('listener') !== 'true') {
+                    setTimeout(() => {
+                        wrapper.style.pointerEvents = 'all';
+                    }, 1350);
                     if (colorOfSelectedCards[0] == colorOfSelectedCards[1]) {
                         this.rightCards(cardElement);
                     } else {
+                        this.enableClickEvent(cardElement);
                         this.wrongCards(cardElementParent);
-                        this.disableClickEvent(cardElement);
                     }
                 }
             }
@@ -90,10 +91,12 @@ class Board {
         document.querySelector('#wrapper').addEventListener('click', (event) => {
             var card = event.target;
             var cardParent = card.parentElement;
-            this.selectedCard(cardParent);
-            card.style.pointerEvents = 'none'
-            clickedOnCards.push(card);
-            clickedOnCardsParent.push(cardParent);
+            if (card.classList.contains('card-back')) {
+                this.addFlipAnimation(cardParent);
+                card.style.pointerEvents = 'none'
+                clickedOnCards.push(card);
+                clickedOnCardsParent.push(cardParent);
+            }
             if (clickedOnCards.length == 2) {
                 this.checkColorOfCards(clickedOnCards, clickedOnCardsParent);
                 clickedOnCards = [];
