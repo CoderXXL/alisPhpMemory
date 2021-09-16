@@ -61,10 +61,8 @@ class Board {
     }
 
     enableClickEvent(element) {
-        setTimeout(() => {
-            element[0].style.pointerEvents = '';
-            element[1].style.pointerEvents = '';
-        }, 1350);
+        element[0].style.pointerEvents = '';
+        element[1].style.pointerEvents = '';
     } 
 
     checkColorOfCards(cardElement, cardElementParent) {
