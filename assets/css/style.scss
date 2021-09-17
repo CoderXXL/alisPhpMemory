@@ -94,6 +94,8 @@ h1 {
     justify-content: center;
     align-items: center;
     display: none;
+    font-family: 'Black Ops One', cursive;
+    color: white;
 
     #container {
         width: 50rem;
@@ -103,10 +105,8 @@ h1 {
         background-color: red;
         border-radius: 10%;
         text-align: center;
-        font-family: 'Black Ops One', cursive;
         text-transform: uppercase;
         text-shadow: 4px 4px #000;
-        color: white;
         animation-duration: .4s;
         animation-name: animatetop;
         display: none;
@@ -114,6 +114,13 @@ h1 {
         @keyframes animatetop {
             from {top: -300px; opacity: 0}
             to {top: 0; opacity: 1}
+        }
+
+        #highscore {
+            position: absolute;
+            top: -25%;
+            width: 100%;
+            font-size: 6rem;
         }
 
         .game_over {

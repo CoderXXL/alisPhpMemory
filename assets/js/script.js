@@ -70,12 +70,15 @@ class Board {
         const container = document.getElementById('container');
         const background = document.getElementById('background');
         const close = document.getElementById('close');
+        const highscore = document.getElementById('highscore');
 
         container.style.display = 'block';
         background.style.display = 'flex';
+        highscore.innerHTML = 'Highscore: ' + (this.right + this.wrong)
         
         close.onclick = () => {
             container.style.display = 'none'
+            background.style.display = 'none';
         }
 
         reloadBtn.onclick = () => {

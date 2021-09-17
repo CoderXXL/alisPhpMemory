@@ -107,6 +107,8 @@ h1 {
       -ms-flex-align: center;
           align-items: center;
   display: none;
+  font-family: 'Black Ops One', cursive;
+  color: white;
 }
 
 #background #container {
@@ -117,10 +119,8 @@ h1 {
   background-color: red;
   border-radius: 10%;
   text-align: center;
-  font-family: 'Black Ops One', cursive;
   text-transform: uppercase;
   text-shadow: 4px 4px #000;
-  color: white;
   -webkit-animation-duration: .4s;
           animation-duration: .4s;
   -webkit-animation-name: animatetop;
@@ -148,6 +148,13 @@ h1 {
     top: 0;
     opacity: 1;
   }
+}
+
+#background #container #highscore {
+  position: absolute;
+  top: -25%;
+  width: 100%;
+  font-size: 6rem;
 }
 
 #background #container .game_over {
