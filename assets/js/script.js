@@ -89,7 +89,7 @@ class Board {
         var colorOfSelectedCards = new Array;
         var playerRightCards = document.querySelector('#right > p');
         var playerWrongCards = document.querySelector('#wrong > p');
-
+        
         for (var i = 0; i < cardElement.length; i++) {
             var color = cardElement[i].style.backgroundColor;
             colorOfSelectedCards.push(color);
@@ -117,11 +117,12 @@ class Board {
                 setTimeout(() => {
                     wrapper.style.pointerEvents = 'all';
                 }, 1350);
-
-                playerRightCards.innerHTML = this.right;
-                playerWrongCards.innerHTML = this.wrong;
             }
         }
+
+        playerRightCards.innerHTML = this.right + '/8';
+        playerWrongCards.innerHTML = this.wrong;
+
     }
 
     addEventHandler() {
