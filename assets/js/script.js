@@ -71,17 +71,15 @@ class Board {
         const background = document.getElementById('background');
         const close = document.getElementById('close');
 
-        if (this.right == 8) { 
-            container.style.display = 'block';
-            background.style.display = 'flex';
-            
-            close.onclick = () => {
-                container.style.display = 'none'
-            }
-    
-            reloadBtn.onclick = () => {
-                location.reload();
-            }
+        container.style.display = 'block';
+        background.style.display = 'flex';
+        
+        close.onclick = () => {
+            container.style.display = 'none'
+        }
+
+        reloadBtn.onclick = () => {
+            location.reload();
         }
     }
 
@@ -89,7 +87,7 @@ class Board {
         var colorOfSelectedCards = new Array;
         var playerRightCards = document.querySelector('#right > p');
         var playerWrongCards = document.querySelector('#wrong > p');
-        
+
         for (var i = 0; i < cardElement.length; i++) {
             var color = cardElement[i].style.backgroundColor;
             colorOfSelectedCards.push(color);
@@ -104,19 +102,21 @@ class Board {
                     if (colorOfSelectedCards[0] == colorOfSelectedCards[1]) {
                         this.rightCards(cardElement);
                         this.right++;
-                        this.gameover();
+                        wrapper.style.pointerEvents = 'all';
+                        if (this.right == 1) {
+                            this.gameover();
+                        }
 
                     } else {
                         this.enableClickEvent(cardElement);
                         this.wrongCards(cardElementParent);
                         this.wrong++;
 
+                        setTimeout(() => {
+                            wrapper.style.pointerEvents = 'all';
+                        }, 1350);
                     }
                 }
-
-                setTimeout(() => {
-                    wrapper.style.pointerEvents = 'all';
-                }, 1350);
             }
         }
 
