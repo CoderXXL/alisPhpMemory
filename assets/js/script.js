@@ -65,6 +65,26 @@ class Board {
         element[1].style.pointerEvents = '';
     } 
 
+    gameover() {
+        const reloadBtn = document.getElementById('reload');
+        const container = document.getElementById('container');
+        const background = document.getElementById('background');
+        const close = document.getElementById('close');
+
+        if (this.right == 8) { 
+            container.style.display = 'block';
+            background.style.display = 'flex';
+            
+            close.onclick = () => {
+                container.style.display = 'none'
+            }
+    
+            reloadBtn.onclick = () => {
+                location.reload();
+            }
+        }
+    }
+
     checkColorOfCards(cardElement, cardElementParent) {
         var colorOfSelectedCards = new Array;
         var playerRightCards = document.querySelector('#right > p');
@@ -84,6 +104,7 @@ class Board {
                     if (colorOfSelectedCards[0] == colorOfSelectedCards[1]) {
                         this.rightCards(cardElement);
                         this.right++;
+                        this.gameover();
 
                     } else {
                         this.enableClickEvent(cardElement);

@@ -1,5 +1,10 @@
+body {
+  margin: 0;
+}
+
 h1 {
   text-align: center;
+  margin-top: 0;
 }
 
 #wrapper {
@@ -83,5 +88,127 @@ h1 {
   width: 100%;
   font-size: 50px;
   margin: 35px auto auto 0px;
+}
+
+#background {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  z-index: 5;
+  width: 100vw;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: none;
+}
+
+#background #container {
+  width: 50rem;
+  height: 40rem;
+  position: absolute;
+  z-index: 15;
+  background-color: red;
+  border-radius: 10%;
+  text-align: center;
+  font-family: 'Black Ops One', cursive;
+  text-transform: uppercase;
+  text-shadow: 4px 4px #000;
+  color: white;
+  -webkit-animation-duration: .4s;
+          animation-duration: .4s;
+  -webkit-animation-name: animatetop;
+          animation-name: animatetop;
+  display: none;
+}
+
+@-webkit-keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+#background #container .game_over {
+  font-size: 9rem;
+  text-transform: uppercase;
+}
+
+#background #container .game_over p {
+  margin: 0;
+  height: 7.5rem;
+}
+
+#background #container .continue {
+  font-size: 3rem;
+  font-family: corbel;
+  font-weight: 600;
+  margin-top: 5rem;
+}
+
+#background #container .choice {
+  font-size: 2rem;
+  width: 100%;
+  font-family: corbel;
+}
+
+#background #container .choice .buttons {
+  width: 40%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 5px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: auto;
+}
+
+#background #container .choice .buttons div {
+  height: 5rem;
+  width: 25rem;
+  line-height: 5rem;
+  margin: 1px;
+  font-weight: 600;
+  border-radius: 20px;
+}
+
+#background #container .choice .buttons :first-child {
+  background-color: green;
+  text-shadow: 3px 3px #000;
+  border: 2px solid #000;
+}
+
+#background #container .choice .buttons :last-child {
+  background-color: black;
+  text-shadow: 2px 2px #f00;
+  width: 100%;
 }
 /*# sourceMappingURL=style.css.map */

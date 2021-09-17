@@ -1,0 +1,79 @@
+#button {
+    width: 300px;
+    height: 200px;
+}
+
+
+#container {
+    width: 50rem;
+    height: 40rem;
+    display: none;
+    position: absolute;
+    background-color: red;
+    border-radius: 10%;
+    text-align: center;
+    font-family: 'Black Ops One', cursive;
+    text-transform: uppercase;
+    text-shadow: 4px 4px #000;
+    color: white;
+    animation-duration: .4s;
+    animation-name: animatetop;
+
+    @keyframes animatetop {
+        from {top: -300px; opacity: 0}
+        to {top: 0; opacity: 1}
+    }
+
+    .game_over {
+        font-size: 9rem;
+        text-transform: uppercase;
+    
+        p {
+            margin: 0;
+            height: 7.5rem;
+        }
+    }
+
+    .continue {
+        font-size: 3rem;
+        font-family: corbel;
+        font-weight: 600;
+        margin-top: 5rem;
+    }
+
+    .choice {
+        font-size: 2rem;
+        width: 100%;
+        font-family: corbel;
+
+        .buttons {
+            width: 40%;
+            display: flex;
+            padding: 5px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+
+            div {
+                height: 5rem;
+                width: 25rem;
+                line-height: 5rem;
+                margin: 1px;
+                font-weight: 600;
+                border-radius: 20px;
+            }
+    
+            :first-child {
+                background-color: green;
+                text-shadow: 3px 3px #000;
+                border: 2px solid #000;
+            }
+            :last-child {
+                background-color: black;
+                text-shadow: 2px 2px #f00;
+                width: 100%;
+            }
+        }
+    }
+}
