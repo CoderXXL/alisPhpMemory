@@ -103,7 +103,7 @@ class Board {
                         this.rightCards(cardElement);
                         this.right++;
                         wrapper.style.pointerEvents = 'all';
-                        if (this.right == 1) {
+                        if (this.right == 8) {
                             this.gameover();
                         }
 
