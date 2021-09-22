@@ -1,4 +1,4 @@
-# Servus ALI!
+# Servus!
 
 Das hier soll deine **WebApp** werden. Das Ziel soll es sein das du am Ende ein Komplett funktionelles Memory hast bei dem anfangs nur **ein** Spieler spielt.
 
