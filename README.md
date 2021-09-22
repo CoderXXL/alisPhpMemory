@@ -19,8 +19,7 @@ Das hier soll deine **WebApp** werden. Das Ziel soll es sein das du am Ende ein 
 - Mobil muss das Memory nicht Funktionieren, aber wenn ein Spieler mobil auf der Seite ist es muss dem Spieler mitgeteilt werden.
 
 # Entwicklung
-Erlaubt sind die Programmiersprachen PHP, JS, SCSS, HTML & MYSQL
-das Memory soll Hauptsächlich aus PHP, HTML und CSS (SCSS) bestehen.
+Erlaubt sind die Programmiersprachen PHP, JS, CSS (SCSS), HTML & MYSQL
 
 # Hilfreich
 - https://www.php.net
