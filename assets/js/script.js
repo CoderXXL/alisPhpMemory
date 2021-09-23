@@ -23,7 +23,7 @@ class Board {
             a[j] = x;
         }
         return a;
-    } 
+    }
 
     colorPicker() {
         this.shuffle(this.colors);
@@ -52,7 +52,7 @@ class Board {
     wrongCards(cardArray) {
         setTimeout(() => {
             cardArray[0].classList.remove('card-flip');
-            cardArray[1].classList.remove('card-flip');            
+            cardArray[1].classList.remove('card-flip');
         }, 1350);
     }
 
@@ -63,19 +63,34 @@ class Board {
     enableClickEvent(element) {
         element[0].style.pointerEvents = '';
         element[1].style.pointerEvents = '';
-    } 
+    }
+
+    getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
 
     gameover() {
         const reloadBtn = document.getElementById('reload');
         const container = document.getElementById('container');
         const background = document.getElementById('background');
         const close = document.getElementById('close');
-        const highscore = document.getElementById('highscore');
+        const highscore = document.getElementById('numericScore');
+        var currentScore = (this.right + this.wrong);
+
+        if (this.getCookie('score') == undefined) {
+            document.cookie = 'score=' + currentScore;
+        } 
+
+        if (currentScore < this.getCookie('score')) {
+            document.cookie = 'score=' + currentScore;
+        }
 
         container.style.display = 'block';
         background.style.display = 'flex';
-        highscore.innerHTML = 'Highscore: ' + (this.right + this.wrong)
-        
+        highscore.innerHTML = this.getCookie('score');
+
         close.onclick = () => {
             container.style.display = 'none'
             background.style.display = 'none';
@@ -99,14 +114,14 @@ class Board {
                 const wrapper = document.getElementById('wrapper')
                 wrapper.style.pointerEvents = 'none'
 
-                if (cardElement[0].getAttribute('listener') !== 'true' && 
+                if (cardElement[0].getAttribute('listener') !== 'true' &&
                     cardElement[1].getAttribute('listener') !== 'true') {
 
                     if (colorOfSelectedCards[0] == colorOfSelectedCards[1]) {
                         this.rightCards(cardElement);
                         this.right++;
                         wrapper.style.pointerEvents = 'all';
-                        if (this.right == 8) {
+                        if (this.right == 1) {
                             this.gameover();
                         }
 
@@ -130,8 +145,8 @@ class Board {
 
     addEventHandler() {
         var clickedOnCards = new Array;
-        var clickedOnCardsParent = new Array;
-        
+        var clickedOnCardsParent = new Array; // The parent element of the selected Card
+
         document.querySelector('#wrapper').addEventListener('click', (event) => {
             var card = event.target;
             var cardParent = card.parentElement;
@@ -158,5 +173,5 @@ const color_arr = [
 ];
 
 window.addEventListener('load', () => {
-    new Board(color_arr);
+    var board = new Board(color_arr);
 });

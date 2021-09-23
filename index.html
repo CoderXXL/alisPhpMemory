@@ -11,22 +11,43 @@
 
     <div id="background">
         <div id="container">
-            <div id="highscore"></div>
-            <div class="game_over">
-                <p>you</p>   
-                <p>won</p>
+            <div id="highscore">
+                <h1>Highscore:</h1>
+                <h1 id="numericScore"></h1>
             </div>
-            <p class="continue">continue</p>
-            <div class="choice">
-                <div class="buttons">
-                    <div id="reload">yes</div>
-                    <div id="close">no</div>
+            <div class="game_over">
+                <div class="you_won">
+                    <p>you</p>   
+                    <p>won</p>
                 </div>
+                <p class="continue">continue</p>
+                <div class="choice">
+                    <div class="buttons">
+                        <div id="reload">yes</div>
+                        <div id="close">no</div>
+                    </div>
+                </div>
+            </div>
             </div>
         </div>
     </div>
 
     <h1>Ali's coole Memory Game</h1>
+
+    
+    <div class="counter">
+
+        <div id="right">
+            <h2>Right:</h2>
+            <p>0/8</p>
+        </div>
+
+        <div id="wrong">
+            <h2>Wrong:</h2>
+            <p>0</p>
+        </div>
+
+    </div>
     
     <div id="wrapper">
         <div class="row">
@@ -136,20 +157,6 @@
                     <div class="card-back"></div>
                 </div>
             </div>
-        </div>
-
-    </div>
-
-    <div class="counter">
-
-        <div id="right">
-            <h2>Right:</h2>
-            <p>0/8</p>
-        </div>
-
-        <div id="wrong">
-            <h2>Wrong:</h2>
-            <p>0</p>
         </div>
 
     </div>

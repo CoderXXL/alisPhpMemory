@@ -5,11 +5,8 @@ body {
 h1 {
   text-align: center;
   margin-top: 0;
+  margin-bottom: 0;
   font-size: 3rem;
-}
-
-#wrapper {
-  margin-top: 5rem;
 }
 
 #wrapper .row {
@@ -23,8 +20,8 @@ h1 {
 
 #wrapper .row .card {
   background-color: transparent;
-  width: 200px;
-  height: 200px;
+  width: 9rem;
+  height: 9rem;
   border: 1px solid #f1f1f1;
   -webkit-perspective: 1000px;
           perspective: 1000px;
@@ -68,27 +65,42 @@ h1 {
 }
 
 .counter {
-  width: 15rem;
-  height: 25rem;
+  width: auto;
   background-color: grey;
-  position: absolute;
-  top: 10rem;
-  left: 10%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 1rem 0;
 }
 
 .counter h2 {
-  font-size: 3rem;
-  display: inline-block;
-  margin-bottom: 0;
+  margin: auto;
+  vertical-align: middle;
+}
+
+.counter #right,
+.counter #wrong {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin: .5rem 5rem;
+  font-size: 2rem;
+  background-color: red;
+  border-radius: 2rem;
+  padding: 1rem;
 }
 
 .counter #right p,
 .counter #wrong p {
-  height: 100%;
-  background-color: red;
-  width: 100%;
-  font-size: 50px;
-  margin: 35px auto auto 0px;
+  font-size: 2.5rem;
+  margin: auto;
 }
 
 #background {
@@ -112,12 +124,8 @@ h1 {
 }
 
 #background #container {
-  width: 50rem;
-  height: 40rem;
-  position: absolute;
-  z-index: 15;
-  background-color: red;
-  border-radius: 10%;
+  height: 100%;
+  vertical-align: middle;
   text-align: center;
   text-transform: uppercase;
   text-shadow: 4px 4px #000;
@@ -151,15 +159,30 @@ h1 {
 }
 
 #background #container #highscore {
-  position: absolute;
-  top: -25%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+#background #container #highscore h1 {
   width: 100%;
   font-size: 6rem;
 }
 
 #background #container .game_over {
   font-size: 9rem;
+  height: auto;
   text-transform: uppercase;
+  background-color: red;
+  border-radius: 10%;
+}
+
+#background #container .game_over .continue {
+  margin-top: 5rem;
 }
 
 #background #container .game_over p {

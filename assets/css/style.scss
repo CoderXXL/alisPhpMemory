@@ -5,12 +5,11 @@ body {
 h1 {
     text-align: center;
     margin-top: 0;
+    margin-bottom: 0;
     font-size: 3rem;
 }
 
 #wrapper {
-
-    margin-top: 5rem;
 
     .row { 
         display: flex;
@@ -18,8 +17,8 @@ h1 {
     
         .card{
             background-color: transparent;
-            width: 200px;
-            height: 200px;
+            width: 9rem;
+            height: 9rem;
             border: 1px solid #f1f1f1;
             perspective: 1000px;
             margin: 5px;
@@ -53,37 +52,42 @@ h1 {
     }
 }
 
+// Cardflip animation
 .card-inner.card-flip {
     transform: rotateY(180deg);
 }
 
+// Right and Wrong counter
 .counter {
-    width: 15rem;
-    height: 25rem;
+    width: auto;
     background-color: grey;
-    position: absolute;
-    top: 10rem;
-    left: 10%;
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
 
     h2 {
-        font-size: 3rem;
-        display: inline-block;
-        margin-bottom: 0;
+        margin: auto;
+        vertical-align: middle;
     }
 
     #right,
     #wrong{
+        display: flex;
+        flex-direction: row;
+        margin: .5rem 5rem;
+        font-size: 2rem;
+        background-color: red;
+        border-radius: 2rem;
+        padding: 1rem;
 
         p {
-            height: 100%;
-            background-color: red;
-            width: 100%;
-            font-size: 50px;
-            margin: 35px auto auto 0px;
+            font-size: 2.5rem;
+            margin: auto;
         }
     }
 }
 
+// Gameover screen after finishing the game
 #background { 
     background-color: rgba($color: #000000, $alpha: .4);
     position: absolute;
@@ -98,12 +102,8 @@ h1 {
     color: white;
 
     #container {
-        width: 50rem;
-        height: 40rem;
-        position: absolute;
-        z-index: 15;
-        background-color: red;
-        border-radius: 10%;
+        height: 100%;
+        vertical-align: middle;
         text-align: center;
         text-transform: uppercase;
         text-shadow: 4px 4px #000;
@@ -117,15 +117,25 @@ h1 {
         }
 
         #highscore {
-            position: absolute;
-            top: -25%;
-            width: 100%;
-            font-size: 6rem;
+            display: flex;
+            flex-direction: row;
+
+            h1 {
+                width: 100%;
+                font-size: 6rem;
+            }
         }
 
         .game_over {
             font-size: 9rem;
+            height: auto;
             text-transform: uppercase;
+            background-color: red;
+            border-radius: 10%;
+
+            .continue {
+                margin-top: 5rem;
+            }
         
             p {
                 margin: 0;
@@ -176,5 +186,4 @@ h1 {
             }
         }
     }
-    
 }
