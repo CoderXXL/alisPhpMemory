@@ -23,7 +23,7 @@ class Board {
             a[j] = x;
         }
         return a;
-    } 
+    }
 
     colorPicker() {
         this.shuffle(this.colors);
@@ -52,7 +52,7 @@ class Board {
     wrongCards(cardArray) {
         setTimeout(() => {
             cardArray[0].classList.remove('card-flip');
-            cardArray[1].classList.remove('card-flip');            
+            cardArray[1].classList.remove('card-flip');
         }, 1350);
     }
 
@@ -63,19 +63,53 @@ class Board {
     enableClickEvent(element) {
         element[0].style.pointerEvents = '';
         element[1].style.pointerEvents = '';
-    } 
+    }
+
+    getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
 
     gameover() {
         const reloadBtn = document.getElementById('reload');
         const container = document.getElementById('container');
         const background = document.getElementById('background');
         const close = document.getElementById('close');
-        const highscore = document.getElementById('highscore');
+        const highscore = document.getElementById('numericScore');
+        var currentScore = (this.right + this.wrong);
 
+        console.log(this.getCookie("score"));
+        console.log(this.getCookie('score') == "undefined")
+        if (this.getCookie('score') == "undefined") {
+            document.cookie = 'score=' + currentScore;
+            console.log(currentScore);
+        } else {
+            var oldScore = this.getCookie('score');
+        }
+
+        if (currentScore < oldScore) {
+            document.cookie = 'score=' + currentScore;
+        } else {
+            document.cookie = 'score=' + oldScore;
+        }
+
+
+        console.log(document.cookie)
         container.style.display = 'block';
         background.style.display = 'flex';
-        highscore.innerHTML = 'Highscore: ' + (this.right + this.wrong)
-        
+        //highscore.innerHTML = blub;
+
         close.onclick = () => {
             container.style.display = 'none'
             background.style.display = 'none';
@@ -99,14 +133,14 @@ class Board {
                 const wrapper = document.getElementById('wrapper')
                 wrapper.style.pointerEvents = 'none'
 
-                if (cardElement[0].getAttribute('listener') !== 'true' && 
+                if (cardElement[0].getAttribute('listener') !== 'true' &&
                     cardElement[1].getAttribute('listener') !== 'true') {
 
                     if (colorOfSelectedCards[0] == colorOfSelectedCards[1]) {
                         this.rightCards(cardElement);
                         this.right++;
                         wrapper.style.pointerEvents = 'all';
-                        if (this.right == 8) {
+                        if (this.right == 1) {
                             this.gameover();
                         }
 
@@ -130,8 +164,8 @@ class Board {
 
     addEventHandler() {
         var clickedOnCards = new Array;
-        var clickedOnCardsParent = new Array;
-        
+        var clickedOnCardsParent = new Array; // The parent element of the selected Card
+
         document.querySelector('#wrapper').addEventListener('click', (event) => {
             var card = event.target;
             var cardParent = card.parentElement;
@@ -158,5 +192,5 @@ const color_arr = [
 ];
 
 window.addEventListener('load', () => {
-    new Board(color_arr);
+    var board = new Board(color_arr);
 });

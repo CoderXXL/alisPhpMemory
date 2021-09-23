@@ -9,9 +9,17 @@
 </head>
 <body>
 
+    <?php
+    session_start();
+
+    ?>
+
     <div id="background">
         <div id="container">
-            <div id="highscore"></div>
+            <div id="highscore">
+                <h1>Highscore:</h1>
+                <h1 id="numericScore"><?= $_COOKIE["score"] ?></h1>
+            </div>
             <div class="game_over">
                 <p>you</p>   
                 <p>won</p>
