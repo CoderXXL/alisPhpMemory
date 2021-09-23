@@ -79,8 +79,13 @@ class Board {
         const highscore = document.getElementById('numericScore');
         var currentScore = (this.right + this.wrong);
 
+        var now = new Date();
+        var time = now.getTime();
+        time += 3600 * 1000;
+        now.setTime(time);
+
         if (this.getCookie('score') == undefined) {
-            document.cookie = 'score=' + currentScore;
+            document.cookie = 'score=' + currentScore + '; expires=' + now.toUTCString();
         } 
 
         if (currentScore < this.getCookie('score')) {
@@ -121,7 +126,7 @@ class Board {
                         this.rightCards(cardElement);
                         this.right++;
                         wrapper.style.pointerEvents = 'all';
-                        if (this.right == 1) {
+                        if (this.right == 8) {
                             this.gameover();
                         }
 
