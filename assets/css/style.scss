@@ -1,10 +1,13 @@
 body {
     margin: 0;
+    font-family: 'Electrolize', sans-serif;
+    //background: url("../images/download-11.png") no-repeat;
+    background-size: 100%;
 }
 
 h1 {
     text-align: center;
-    margin-top: 0;
+    margin-top: 1rem;
     margin-bottom: 0;
     font-size: 3rem;
 }
@@ -17,8 +20,8 @@ h1 {
     
         .card{
             background-color: transparent;
-            width: 9rem;
-            height: 9rem;
+            width: 8.5rem;
+            height: 8.5rem;
             border: 1px solid #f1f1f1;
             perspective: 1000px;
             margin: 5px;
@@ -91,6 +94,7 @@ h1 {
 #background { 
     background-color: rgba($color: #000000, $alpha: .4);
     position: absolute;
+    top: 0;
     z-index: 5;
     width: 100vw;
     height: 100vh;
