@@ -73,7 +73,7 @@ h1 {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  margin: 1rem 0;
+  margin: 1rem 1px;
 }
 
 .counter h2 {
