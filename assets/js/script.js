@@ -33,7 +33,7 @@ class Board {
     generateDeck() {
         const cardElements = document.querySelectorAll('.card');
         let deck = []
-
+        // Creating the Cards and giving them a Color
         for (let card of cardElements) {
             let currentCard = new Card(card, this.colorPicker());
             deck.push(currentCard);
@@ -44,6 +44,7 @@ class Board {
         return deck;
     }
 
+    // Make Cards unclickable
     rightCards(cardArray) {
         cardArray[0].setAttribute('listener', 'true');
         cardArray[1].setAttribute('listener', 'true');
@@ -77,21 +78,28 @@ class Board {
         const background = document.getElementById('background');
         const close = document.getElementById('close');
         const highscore = document.getElementById('numericScore');
+        var yourScore = document.getElementById('current_score');
         var currentScore = (this.right + this.wrong);
 
+        // Timeout for the Cookie 
         var now = new Date();
         var time = now.getTime();
         time += 3600 * 1000;
         now.setTime(time);
 
+        yourScore.innerHTML = 'SCORE: ' + currentScore;
+        
+        // Creating Cookie for the Highscore
         if (this.getCookie('score') == undefined) {
             document.cookie = 'score=' + currentScore + '; expires=' + now.toUTCString();
         } 
 
+        // Update the value of the Cookie if a new Highscore got reached
         if (currentScore < this.getCookie('score')) {
             document.cookie = 'score=' + currentScore;
         }
 
+        // Enable the endscreen when the Game is done
         container.style.display = 'block';
         background.style.display = 'flex';
         highscore.innerHTML = this.getCookie('score');
@@ -110,35 +118,33 @@ class Board {
         var colorOfSelectedCards = new Array;
         var playerRightCards = document.querySelector('#right > p');
         var playerWrongCards = document.querySelector('#wrong > p');
+        const wrapper = document.getElementById('wrapper');
 
         for (var i = 0; i < cardElement.length; i++) {
             var color = cardElement[i].style.backgroundColor;
             colorOfSelectedCards.push(color);
 
             if (colorOfSelectedCards.length == 2) {
-                const wrapper = document.getElementById('wrapper')
                 wrapper.style.pointerEvents = 'none'
 
-                if (cardElement[0].getAttribute('listener') !== 'true' &&
-                    cardElement[1].getAttribute('listener') !== 'true') {
+                // Check the selected Cards if they're the same
+                if (colorOfSelectedCards[0] == colorOfSelectedCards[1]) {
+                    this.rightCards(cardElement);
+                    this.right++;
+                    wrapper.style.pointerEvents = 'all';
 
-                    if (colorOfSelectedCards[0] == colorOfSelectedCards[1]) {
-                        this.rightCards(cardElement);
-                        this.right++;
-                        wrapper.style.pointerEvents = 'all';
-                        if (this.right == 8) {
-                            this.gameover();
-                        }
-
-                    } else {
-                        this.enableClickEvent(cardElement);
-                        this.wrongCards(cardElementParent);
-                        this.wrong++;
-
-                        setTimeout(() => {
-                            wrapper.style.pointerEvents = 'all';
-                        }, 1350);
+                    if (this.right == 8) {
+                        this.gameover();
                     }
+
+                } else {
+                    this.enableClickEvent(cardElement);
+                    this.wrongCards(cardElementParent);
+                    this.wrong++;
+
+                    setTimeout(() => {
+                        wrapper.style.pointerEvents = 'all';
+                    }, 1350);
                 }
             }
         }
@@ -149,24 +155,26 @@ class Board {
     }
 
     addEventHandler() {
-        var clickedOnCards = new Array;
-        var clickedOnCardsParent = new Array; // The parent element of the selected Card
+        var clickedCard = new Array;
+        var parentOfClickedCard = new Array; // The parent element of the selected Card
 
         document.querySelector('#wrapper').addEventListener('click', (event) => {
             var card = event.target;
             var cardParent = card.parentElement;
 
+            // What happenes to the selected Card
             if (card.classList.contains('card-back')) {
                 this.addFlipAnimation(cardParent);
                 card.style.pointerEvents = 'none'
-                clickedOnCards.push(card);
-                clickedOnCardsParent.push(cardParent);
+                clickedCard.push(card);
+                parentOfClickedCard.push(cardParent);
             }
 
-            if (clickedOnCards.length == 2) {
-                this.checkColorOfCards(clickedOnCards, clickedOnCardsParent);
-                clickedOnCards = [];
-                clickedOnCardsParent = [];
+            // When two Cards are selected, they'll be checked if they're the same
+            if (clickedCard.length == 2) {
+                this.checkColorOfCards(clickedCard, parentOfClickedCard);
+                clickedCard = [];
+                parentOfClickedCard = [];
             }
         });
     }
@@ -178,5 +186,5 @@ const color_arr = [
 ];
 
 window.addEventListener('load', () => {
-    var board = new Board(color_arr);
+    new Board(color_arr);
 });
