@@ -1,6 +1,6 @@
 class Card {
     #locked = false;
-    #color = "fffff";
+    #color = "black";
     #position = new Array(2);
     #element;
 
@@ -162,6 +162,8 @@ function Array2D(x, y){
 }
 
 function start(cards) {
+
+    /* create cards */
     let count = 0;
 
     for (y = 0; y < 4; y++) {
@@ -176,16 +178,18 @@ function start(cards) {
             }, true);
 
             game.saveCard(card, x, y);
+            
             count++;
         }
     }
 
+    /* set active player none*/
     document.getElementById("activePlayer").innerHTML += "-";
 
+    /* random card colors */
+    cardColors();
 
-    /* Karte Farben */
-
-    /* Namen eingeben */
+    /* set playernames */
 
 
 
@@ -197,6 +201,117 @@ function start(cards) {
     document.getElementById("test1").innerHTML = "[DEBUG] Spieler 1: " + game.getPlayerOne().getPoints();
     document.getElementById("test2").innerHTML = "[DEBUG] Spieler 2: " + game.getPlayerTwo().getPoints();
     document.getElementById("test3").innerHTML = "[DEBUG] Game status: " + game.getStatus();
+}
+
+function cardColors() {
+    let min = 0, max = 10;
+
+    let minColor = 2;
+
+    let red = 0
+    let yellow = 0
+    let green = 0
+    let gray = 0
+    let aqua = 0
+    let blue = 0
+    let purple = 0
+    let orange = 0
+    let lime = 0
+    let pink = 0
+
+    for (y = 0; y < 4; y++) {
+        for (x = 0; x < 5; x++) {
+            game.getCard(x, y).setColor(generateColor());
+        }
+    }
+
+    function generateColor() {
+                let random = Math.floor(Math.random() * max);
+    
+                switch (random) {
+                    case 0:
+                        if(red < minColor) {
+                            red++;
+                            return "red";
+                        } else {
+                            return generateColor(); 
+                        }
+                        break;
+                    case 1:
+                        if(yellow < minColor) {
+                            yellow++;
+                            return "yellow";
+                        } else {
+                            return generateColor(); 
+                        }
+                        break;
+                    case 2:
+                        if(green < minColor) {
+                            green++;
+                            return "green";
+                        } else {
+                            return generateColor(); 
+                        }
+                        break;
+                    case 3:
+                        if(gray < minColor) {
+                            gray++;
+                            return "gray";
+                        } else {
+                            return generateColor(); 
+                        }
+                        break;
+                    case 4:
+                        if(aqua < minColor) {
+                            aqua++;
+                            return "aqua";
+                        } else {
+                            return generateColor(); 
+                        }
+                        break;
+                    case 5:
+                        if(blue < minColor) {
+                            blue++;
+                            return "blue";
+                        } else {
+                            return generateColor(); 
+                        }
+                        break;
+                    case 6:
+                        if(purple < minColor) {
+                            purple++;
+                            return "purple";
+                        } else {
+                            return generateColor(); 
+                        }
+                        break;
+                    case 7:
+                        if(orange < minColor) {
+                            orange++;
+                            return "orange";
+                        } else {
+                            return generateColor(); 
+                        }
+                        break;
+                    case 8:
+                        if(lime < minColor) {
+                            lime++;
+                            return "lime";
+                        } else {
+                            return generateColor(); 
+                        }
+                        break;
+                    case 9:
+                        if(pink < minColor) {
+                            pink++;
+                            return "pink";
+                        } else {
+                            return generateColor(); 
+                        }
+                    default:
+                        return generateColor();
+                }
+    }
 }
 
 function addClickEvent(card) {
@@ -237,7 +352,7 @@ function addClickEvent(card) {
 function moveOne(card) {
     if (card.isLocked()) {return}
 
-    /* Karte umdehen --> */
+    card.getElement().style.background = game.getCard(x, y).getColor();
 
     game.setCardOne(card);
     game.setStatus(2);
@@ -249,7 +364,7 @@ function moveTwo(card) {
     if (card.isLocked()) {return}
     if(card.getX() == game.getCardOne().getX() && card.getY() == game.getCardOne().getY()) {return}
 
-    /* Karte umdehen --> */
+    card.getElement().style.background = game.getCard(x, y).getColor();
 
     game.setCardTwo(card);
     game.setStatus(3);
@@ -296,17 +411,21 @@ function checkCards(cardOne, cardTwo) {
         } else {
             /*game.changePlayer(true);*/
             game.setStatus(1);
-
-            /* Karte umdehen --> */
         }
 
     } else {
         console.log("Spieler " + game.getActivePlayer().getName() + " hat eine falsche Kombination.");
         game.changePlayer(false);
-        game.setStatus(1);
 
-        /* Karte umdehen --> */
+        setTimeout(function() {
+            cardOne.getElement().style.background = "lightskyblue";
+            cardTwo.getElement().style.background = "lightskyblue";
+
+            game.setStatus(1);
+            document.getElementById("test3").innerHTML = "[DEBUG] Game status: " + game.getStatus(); /* SPÄTER ENZFERNEN */
+        }, 2000);
     }
+
     document.getElementById("test3").innerHTML = "[DEBUG] Game status: " + game.getStatus(); /* SPÄTER ENZFERNEN */
 }
 
