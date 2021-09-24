@@ -11,6 +11,53 @@ h1 {
   font-size: 3rem;
 }
 
+#menu_background {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 99vw;
+  height: 100vh;
+  background-color: red;
+  z-index: 10;
+  top: 0;
+  visibility: hidden;
+}
+
+#menu_background h1 {
+  margin-bottom: 5rem;
+  font-size: 5rem;
+}
+
+#menu_background div {
+  width: auto;
+  height: auto;
+  background-color: green;
+  margin-bottom: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 3rem;
+  padding: 1rem;
+  border-radius: 20px;
+}
+
 #wrapper .row {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -194,6 +241,9 @@ h1 {
 #background #container .game_over .continue {
   margin: 1.5rem 0;
   height: auto;
+  font-size: 3rem;
+  font-family: corbel;
+  font-weight: 600;
 }
 
 #background #container .game_over p {
@@ -201,20 +251,13 @@ h1 {
   height: 7.5rem;
 }
 
-#background #container .continue {
-  font-size: 3rem;
-  font-family: corbel;
-  font-weight: 600;
-  margin-top: 5rem;
-}
-
-#background #container .choice {
+#background #container .game_over .choice {
   font-size: 2rem;
   width: 100%;
   font-family: corbel;
 }
 
-#background #container .choice .buttons {
+#background #container .game_over .choice .buttons {
   width: 40%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -233,7 +276,7 @@ h1 {
   margin: auto;
 }
 
-#background #container .choice .buttons div {
+#background #container .game_over .choice .buttons div {
   height: 5rem;
   width: 25rem;
   line-height: 5rem;
@@ -242,15 +285,14 @@ h1 {
   border-radius: 20px;
 }
 
-#background #container .choice .buttons :first-child {
+#background #container .game_over .choice .buttons :first-child {
   background-color: green;
   text-shadow: 3px 3px #000;
   border: 2px solid #000;
 }
 
-#background #container .choice .buttons :last-child {
+#background #container .game_over .choice .buttons :last-child {
   background-color: black;
   text-shadow: 2px 2px #f00;
-  width: 100%;
 }
 /*# sourceMappingURL=style.css.map */

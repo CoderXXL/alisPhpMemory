@@ -12,6 +12,7 @@ class Board {
         this.right = 0;
         this.generateDeck();
         this.addEventHandler();
+        this.selectMode();
     }
 
     shuffle(a) {
@@ -33,6 +34,7 @@ class Board {
     generateDeck() {
         const cardElements = document.querySelectorAll('.card');
         let deck = []
+
         // Creating the Cards and giving them a Color
         for (let card of cardElements) {
             let currentCard = new Card(card, this.colorPicker());
@@ -40,7 +42,6 @@ class Board {
             let cardBack = currentCard.element.querySelector('.card-back');
             cardBack.style.backgroundColor = currentCard.color;
         }
-        console.log(deck)
         return deck;
     }
 
@@ -72,26 +73,28 @@ class Board {
         if (parts.length === 2) return parts.pop().split(';').shift();
     }
 
+    CookieTimeout() {
+        var now = new Date();
+        var time = now.getTime();
+
+        time += 3600 * 1000;
+        now.setTime(time);
+        return now.toUTCString()
+    }
+
     gameover() {
         const reloadBtn = document.getElementById('reload');
         const container = document.getElementById('container');
         const background = document.getElementById('background');
-        const close = document.getElementById('close');
         const highscore = document.getElementById('numericScore');
         var yourScore = document.getElementById('current_score');
         var currentScore = (this.right + this.wrong);
 
-        // Timeout for the Cookie 
-        var now = new Date();
-        var time = now.getTime();
-        time += 3600 * 1000;
-        now.setTime(time);
-
         yourScore.innerHTML = 'SCORE: ' + currentScore;
         
         // Creating Cookie for the Highscore
-        if (this.getCookie('score') == undefined) {
-            document.cookie = 'score=' + currentScore + '; expires=' + now.toUTCString();
+        if (this.getCookie('score') === undefined) {
+            document.cookie = 'score=' + currentScore + '; expires=' + this.CookieTimeout();
         } 
 
         // Update the value of the Cookie if a new Highscore got reached
@@ -104,18 +107,49 @@ class Board {
         background.style.display = 'flex';
         highscore.innerHTML = this.getCookie('score');
 
-        close.onclick = () => {
-            container.style.display = 'none'
-            background.style.display = 'none';
-        }
-
         reloadBtn.onclick = () => {
             location.reload();
         }
     }
 
+    
+    selectMode() {
+        const menuBackground = document.getElementById('menu_background');
+        const singlePlayer = document.getElementById('single_player');
+        const multiPlayer = document.getElementById('multi_player')
+        const mode = document.getElementById('mode');
+
+        singlePlayer.onclick = () => {
+            location.reload();
+        }
+
+        // Timeout for the Cookie 
+        if (this.getCookie('visited') === undefined) {
+            menuBackground.style.visibility = 'visible';
+            document.cookie = 'visited=true';
+        } 
+
+        mode.onclick = () => {
+            document.cookie = 'visited=true';
+            menuBackground.style.visibility = 'visible';
+        }
+
+        if (this.getCookie('visited') === true) {
+            menuBackground.style.visibility = 'visible';
+            document.cookie = 'visited = false; expires=' + this.CookieTimeout();
+        } 
+
+        multiPlayer.onclick = () => {
+            this.createMultiPlayer();
+        }
+    }
+
+    createMultiPlayer() {
+        //TODO create a Multiplayer mode
+    }
+
     checkColorOfCards(cardElement, cardElementParent) {
-        var colorOfSelectedCards = new Array;
+        var colorOfSelectedCards = [];
         var playerRightCards = document.querySelector('#right > p');
         var playerWrongCards = document.querySelector('#wrong > p');
         const wrapper = document.getElementById('wrapper');
@@ -133,6 +167,7 @@ class Board {
                     this.right++;
                     wrapper.style.pointerEvents = 'all';
 
+                    //! How many Siblings you gotta find
                     if (this.right == 8) {
                         this.gameover();
                     }
@@ -155,8 +190,8 @@ class Board {
     }
 
     addEventHandler() {
-        var clickedCard = new Array;
-        var parentOfClickedCard = new Array; // The parent element of the selected Card
+        var clickedCard = [];
+        var parentOfClickedCard = []; // The parent element of the selected Card
 
         document.querySelector('#wrapper').addEventListener('click', (event) => {
             var card = event.target;

@@ -12,6 +12,39 @@ h1 {
     font-size: 3rem;
 }
 
+// Decide which Gamemode to play at the beginning of the Game
+#menu_background {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 99vw;
+    height: 100vh;
+    background-color: red;
+    z-index: 10;
+    top: 0;
+    visibility: hidden;
+
+    h1 {
+        margin-bottom: 5rem;
+        font-size: 5rem;
+    }
+
+    div {
+        width: auto;
+        height: auto;
+        background-color: green;
+        margin-bottom: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 3rem;
+        padding: 1rem;
+        border-radius: 20px;
+    }        
+}
+
 #wrapper {
 
     .row { 
@@ -147,53 +180,49 @@ h1 {
             .continue {
                 margin: 1.5rem 0;
                 height: auto;
+                font-size: 3rem;
+                font-family: corbel;
+                font-weight: 600;
             }
-        
+
             p {
                 margin: 0;
                 height: 7.5rem;
             }
-        }
-    
-        .continue {
-            font-size: 3rem;
-            font-family: corbel;
-            font-weight: 600;
-            margin-top: 5rem;
-        }
-    
-        .choice {
-            font-size: 2rem;
-            width: 100%;
-            font-family: corbel;
-    
-            .buttons {
-                width: 40%;
-                display: flex;
-                padding: 5px;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                margin: auto;
-    
-                div {
-                    height: 5rem;
-                    width: 25rem;
-                    line-height: 5rem;
-                    margin: 1px;
-                    font-weight: 600;
-                    border-radius: 20px;
-                }
+
+            .choice {
+                font-size: 2rem;
+                width: 100%;
+                font-family: corbel;
+
+                .buttons {
+                    width: 40%;
+                    display: flex;
+                    padding: 5px;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    margin: auto;
         
-                :first-child {
-                    background-color: green;
-                    text-shadow: 3px 3px #000;
-                    border: 2px solid #000;
-                }
-                :last-child {
-                    background-color: black;
-                    text-shadow: 2px 2px #f00;
-                    width: 100%;
+                    div {
+                        height: 5rem;
+                        width: 25rem;
+                        line-height: 5rem;
+                        margin: 1px;
+                        font-weight: 600;
+                        border-radius: 20px;
+                    }
+
+                    :first-child {
+                        background-color: green;
+                        text-shadow: 3px 3px #000;
+                        border: 2px solid #000;
+                    }
+                    
+                    :last-child {
+                        background-color: black;
+                        text-shadow: 2px 2px #f00;
+                    }
                 }
             }
         }
