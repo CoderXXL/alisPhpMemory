@@ -1,0 +1,15 @@
+.main {
+    background: gray;
+    width: 600px;
+}
+
+#card {
+    background: lightskyblue;
+    
+    width: 100px;
+    height: 100px;
+
+    margin: 10px 10px 10px 10px;
+    
+    float: left;
+}
