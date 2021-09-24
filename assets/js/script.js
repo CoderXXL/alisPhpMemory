@@ -37,7 +37,7 @@ class Memory {
 
     getCardPairCode(cardId)
     {
-        return this.sendRequest("getCardPairCode", cardId);
+       return this.sendRequest("getCardPairCode", cardId);
     }
 
     sendRequest(name, data)

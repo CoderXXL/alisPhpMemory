@@ -14,35 +14,53 @@
 <?php
     require_once('assets/php/Memory.php');
 
-
     session_start();
 
+    $memory = new Memory();
 
     if (!isset($_SESSION['memory'])) {
-        $memory = new Memory(8, 2);
-        $_SESSION['memory'] = serialize($memory);
+        $pairCount = 2;
+        $cardDuplicates = 2;
+
+        $memory->startNewGame($pairCount, $cardDuplicates);
+
+        $settings = [
+            'pairCount' => $pairCount,
+            'cardDuplicates' => $cardDuplicates,
+            'cards' => []
+        ];
+
+        foreach ($memory->getCards() as $card) {
+            $settings['cards'][] = [
+                'cardId' => $card->getCardId(),
+                'cardCode' => $card->getCardCode()
+            ];
+        }
+
+        $_SESSION['memory'] = $settings;
+
     } else {
-        $memory = unserialize($_SESSION['memory']);
+        $settings = $_SESSION['memory'];
+
+        $pairCount = $settings['pairCount'];
+        $cardDuplicates = $settings['cardDuplicates'];
+        $cards = $settings['cards'];
+
+        $memory->rebuildGame($pairCount, $cardDuplicates, $cards);
     }
 
 
-    $cards = $memory->getCards();
+    $playCards = $memory->getCards();
     $cardsPerRow = $memory->getCardsPerRow();
-    //$pairs = $memory->getPairs();
 
     $i = 1;
 
 ?>
 
 
-<pre>
-    <!-- <?= var_dump($cards) ?>  -->
-    <?= var_dump($_SESSION) ?>
-</pre>
-
     <div id="memory" class="wrapper">
 
-        <?php foreach ($cards as $card): ?>
+        <?php foreach ($playCards as $card): ?>
         
         <?php if ($i === 1): ?>
             <div class="row">

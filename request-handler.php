@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+require_once('assets/php/Memory.php');
 
 header('Content-type: application/json');
 
@@ -40,8 +41,14 @@ try {
     exit;
 }
 
+if (!isset($_SESSION['memory'])) {
+    return;
+}
+
+$memory = unserialize($_SESSION['memory']);
+
+return $memory->getPairIdByCardId($cardCode);
 
 function getCardPairCode($cardCode)
 {
-    return 'blubber';
 }

@@ -11,15 +11,31 @@ class Memory
     private $cardDuplicates;
     private $cardCount;
 
-    public function __construct(
-        int $pairCount = 8,
-        int $cardDuplicates = 2
+    public function __construct($settings){
+session_start();
+    }
 
-    ) {
+    public function startNewGame(int $pairCount = 8, int $cardDuplicates = 2)
+    {
         $this->pairCount = $pairCount;
         $this->cardDuplicates = $cardDuplicates;
 
         $this->createCards();
+    }
+
+    public function rebuildGame(int $pairCount = 8, int $cardDuplicates = 2, $cards)
+    {
+        $this->pairCount = $pairCount;
+        $this->cardDuplicates = $cardDuplicates;
+
+        $this->cardCount = $this->pairCount * $this->cardDuplicates;
+
+        foreach ($cards as $card) {
+            $card = new Card($card['cardCode'], $card['cardId']);
+            $this->cards[$card->getCardId()] = $card;
+        }
+
+
     }
 
     private function createCards()
@@ -70,6 +86,8 @@ class Memory
 
     public function getPairIdByCardId($cardId)
     {
-        return $this->pairCount;
+        $card = $this->cards[$cardId];
+
+        return $card->getCode();
     }
 }
