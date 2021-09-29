@@ -10,8 +10,8 @@ function loadCards() {
 }
 
 function Array2D(x, y){
-    this.items = new Array(x);
-    for(i = 0; i < y; i++){
-        this.items[i] = new Array(y);
+    this.items = new Array(y);
+    for(i = 0; i < x; i++){
+        this.items[i] = new Array(x);
     }
 }

@@ -41,6 +41,14 @@ function start(cards) {
     document.getElementById("test1").innerHTML = "[DEBUG] Spieler 1: " + game.getPlayerOne().getPoints();
     document.getElementById("test2").innerHTML = "[DEBUG] Spieler 2: " + game.getPlayerTwo().getPoints();
     document.getElementById("test3").innerHTML = "[DEBUG] Game status: " + game.getStatus();
+
+    /* Alle Farben anzeigen
+
+    for (a = 0; a < 4; a++) {
+        for (b = 0; b < 5; b++) {
+            game.getCard(b, a).getElement().style.background = game.getCard(b, a).getColor();
+        }
+    }*/
     /* SPÄTER ENTFERNEN */
 }
 
@@ -59,18 +67,39 @@ function addClickEvent(card) {
 
 function cardColors() {
     let max = 10;
-    let minColor = 2;
+    let min = 2;
 
-    let red = 0;
-    let yellow = 0;
-    let green = 0;
-    let gray = 0;
-    let aqua = 0;
-    let blue = 0;
-    let purple = 0;
-    let orange = 0;
-    let lime = 0;
-    let pink = 0;
+    let colors = new Array2D(10, 2);
+
+    colors.items[0][0] = "red";
+    colors.items[0][1] = 0;
+
+    colors.items[1][0] = "yellow";
+    colors.items[1][1] = 0;
+
+    colors.items[2][0] = "green";
+    colors.items[2][1] = 0;
+
+    colors.items[3][0] = "gray";
+    colors.items[3][1] = 0;
+    
+    colors.items[4][0] = "aqua";
+    colors.items[4][1] = 0;
+
+    colors.items[5][0] = "blue";
+    colors.items[5][1] = 0;
+
+    colors.items[6][0] = "purple";
+    colors.items[6][1] = 0;
+
+    colors.items[7][0] = "orange";
+    colors.items[7][1] = 0;
+
+    colors.items[8][0] = "lime";
+    colors.items[8][1] = 0;
+
+    colors.items[9][0] = "pink";
+    colors.items[9][1] = 0;
 
     for (y = 0; y < 4; y++) {
         for (x = 0; x < 5; x++) {
@@ -80,89 +109,12 @@ function cardColors() {
 
     function generateColor() {
                 let random = Math.floor(Math.random() * max);
-    
-                switch (random) {
-                    case 0:
-                        if(red < minColor) {
-                            red++;
-                            return "red";
-                        } else {
-                            return generateColor(); 
-                        }
-                        break;
-                    case 1:
-                        if(yellow < minColor) {
-                            yellow++;
-                            return "yellow";
-                        } else {
-                            return generateColor(); 
-                        }
-                        break;
-                    case 2:
-                        if(green < minColor) {
-                            green++;
-                            return "green";
-                        } else {
-                            return generateColor(); 
-                        }
-                        break;
-                    case 3:
-                        if(gray < minColor) {
-                            gray++;
-                            return "gray";
-                        } else {
-                            return generateColor(); 
-                        }
-                        break;
-                    case 4:
-                        if(aqua < minColor) {
-                            aqua++;
-                            return "aqua";
-                        } else {
-                            return generateColor(); 
-                        }
-                        break;
-                    case 5:
-                        if(blue < minColor) {
-                            blue++;
-                            return "blue";
-                        } else {
-                            return generateColor(); 
-                        }
-                        break;
-                    case 6:
-                        if(purple < minColor) {
-                            purple++;
-                            return "purple";
-                        } else {
-                            return generateColor(); 
-                        }
-                        break;
-                    case 7:
-                        if(orange < minColor) {
-                            orange++;
-                            return "orange";
-                        } else {
-                            return generateColor(); 
-                        }
-                        break;
-                    case 8:
-                        if(lime < minColor) {
-                            lime++;
-                            return "lime";
-                        } else {
-                            return generateColor(); 
-                        }
-                        break;
-                    case 9:
-                        if(pink < minColor) {
-                            pink++;
-                            return "pink";
-                        } else {
-                            return generateColor(); 
-                        }
-                    default:
-                        return generateColor();
+
+                if (colors.items[random][1] >= min) {
+                    return generateColor();
+                } else {
+                    colors.items[random][1] = colors.items[random][1] + 1;
+                    return colors.items[random][0];
                 }
     }
 }

@@ -52,11 +52,11 @@ class Game {
     }
 
     getCard(x, y) {
-        return this.#cards.items[y][x];
+        return this.#cards.items[x][y];
     }
 
     saveCard(card, x, y) {
-        this.#cards.items[y][x] = new Card(card, x, y);
+        this.#cards.items[x][y] = new Card(card, x, y);
     }
 
     getActivePlayer(){
