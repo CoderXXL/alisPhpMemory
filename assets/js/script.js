@@ -10,9 +10,11 @@ class Board {
         this.colors = colors;
         this.wrong = 0;
         this.right = 0;
+        this.wrong2 = 0;
         this.generateDeck();
         this.addEventHandler();
         this.selectMode();
+        this.checkGameMode();
     }
 
     shuffle(a) {
@@ -82,24 +84,43 @@ class Board {
         return now.toUTCString()
     }
 
+    checkWrongCounter() {
+        if (this.wrong < this.wrong2) {
+            return (this.right + this.wrong);
+        } else {
+            return (this.right + this.wrong2);
+        }
+    }
+
     gameover() {
         const reloadBtn = document.getElementById('reload');
         const container = document.getElementById('container');
         const background = document.getElementById('background');
         const highscore = document.getElementById('numericScore');
         var yourScore = document.getElementById('current_score');
-        var currentScore = (this.right + this.wrong);
 
-        yourScore.innerHTML = 'SCORE: ' + currentScore;
+        yourScore.innerHTML = 'SCORE: ' + (this.checkWrongCounter());
         
         // Creating Cookie for the Highscore
         if (this.getCookie('score') === undefined) {
-            document.cookie = 'score=' + currentScore + '; expires=' + this.CookieTimeout();
-        } 
+            if (sessionStorage.getItem('mode') === 'true') {
+                document.cookie = 'score=' + (this.checkWrongCounter() + this.right) + '; expires=' + this.CookieTimeout();
+            } else {
+                document.cookie = 'score=' + (this.right + this.wrong) + '; expires=' + this.CookieTimeout();
+            }
+        }
 
         // Update the value of the Cookie if a new Highscore got reached
-        if (currentScore < this.getCookie('score')) {
-            document.cookie = 'score=' + currentScore;
+        if (sessionStorage.getItem('mode') === 'true') {
+            yourScore.innerHTML = 'SCORE: ' + (this.checkWrongCounter());
+            if (this.checkWrongCounter() < this.getCookie('score')) {
+                document.cookie = 'score=' + this.checkWrongCounter();
+            }
+        } else {
+            yourScore.innerHTML = 'SCORE: ' + (this.right + this.wrong);
+            if ((this.wrong + this.right) < this.getCookie('score')) {
+                document.cookie = 'score=' + (this.wrong + this.right);
+            }
         }
 
         // Enable the endscreen when the Game is done
@@ -110,42 +131,74 @@ class Board {
         reloadBtn.onclick = () => {
             location.reload();
         }
+
     }
 
-    
-    selectMode() {
-        const menuBackground = document.getElementById('menu_background');
-        const singlePlayer = document.getElementById('single_player');
-        const multiPlayer = document.getElementById('multi_player')
-        const mode = document.getElementById('mode');
-
-        singlePlayer.onclick = () => {
-            location.reload();
-        }
-
-        // Timeout for the Cookie 
-        if (this.getCookie('visited') === undefined) {
-            menuBackground.style.visibility = 'visible';
-            document.cookie = 'visited=true';
-        } 
-
-        mode.onclick = () => {
-            document.cookie = 'visited=true';
-            menuBackground.style.visibility = 'visible';
-        }
-
-        if (this.getCookie('visited') === true) {
-            menuBackground.style.visibility = 'visible';
-            document.cookie = 'visited = false; expires=' + this.CookieTimeout();
-        } 
-
-        multiPlayer.onclick = () => {
+    checkGameMode() {
+        if (sessionStorage.getItem('multi') === 'true') {
             this.createMultiPlayer();
         }
     }
 
     createMultiPlayer() {
-        //TODO create a Multiplayer mode
+        const counter = document.getElementsByClassName('counter');
+
+        if (sessionStorage.getItem('multi') === 'true') {
+            counter[0].classList.add('multiCounter');
+        }
+    }
+    
+    selectMode() {
+        const menuBackground = document.getElementById('menu_background');
+        const singlePlayer = document.getElementById('single_player');
+        const multiPlayer = document.getElementById('multi_player');
+        const mode = document.getElementById('mode');
+
+        mode.onclick = () => {
+            sessionStorage.setItem('visited', 'true');
+            menuBackground.style.visibility = 'visible';
+        }
+
+        singlePlayer.onclick = () => {
+            sessionStorage.setItem('multi', 'false');
+            sessionStorage.setItem('mode', 'false')
+            document.cookie = 'score=100';
+            location.reload();
+        }
+
+        multiPlayer.onclick = () => {
+            sessionStorage.setItem('multi', 'true');
+            sessionStorage.setItem('mode', 'true')
+            document.cookie = 'score=100';
+            location.reload()
+        }
+
+        if (sessionStorage.getItem('visited') === null) {
+            menuBackground.style.visibility = 'visible';
+            sessionStorage.setItem('visited', 'true')
+        }
+
+        if (sessionStorage.getItem('visited') === 'true') {
+            sessionStorage.setItem('visited', 'false');
+        } 
+    }
+
+    increaseWrong(count) {
+        var playerWrongCards = document.querySelector('#wrong > p');
+        var secondCounter = document.querySelector('#wrong2 > p');
+        var fullCount = (this.wrong + this.wrong2 + 1);
+        fullCount = fullCount * (count % 2);
+
+        if (fullCount !== 0) {
+            --fullCount;
+            if (fullCount % 2 === 1) {
+                secondCounter.innerHTML = ++this.wrong2;
+    
+            } else {
+                playerWrongCards.innerHTML = ++this.wrong;
+    
+            }
+        }
     }
 
     checkColorOfCards(cardElement, cardElementParent) {
@@ -173,20 +226,26 @@ class Board {
                     }
 
                 } else {
+
+                    if (sessionStorage.getItem('mode') == 'true') {
+                        this.increaseWrong(1);
+                    } else {
+                        ++this.wrong;
+                        playerWrongCards.innerHTML = this.wrong;
+                    }
+
                     this.enableClickEvent(cardElement);
                     this.wrongCards(cardElementParent);
-                    this.wrong++;
 
-                    setTimeout(() => {
-                        wrapper.style.pointerEvents = 'all';
-                    }, 1350);
                 }
+
+                setTimeout(() => {
+                    wrapper.style.pointerEvents = 'all';
+                }, 1350);
             }
         }
 
         playerRightCards.innerHTML = this.right + '/8';
-        playerWrongCards.innerHTML = this.wrong;
-
     }
 
     addEventHandler() {

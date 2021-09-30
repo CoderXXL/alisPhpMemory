@@ -127,7 +127,6 @@ h1 {
 
 .counter h2 {
   margin: auto;
-  vertical-align: middle;
 }
 
 .counter #right,
@@ -135,10 +134,6 @@ h1 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
   margin: .5rem 5rem;
   font-size: 2rem;
   background-color: red;
@@ -148,6 +143,46 @@ h1 {
 
 .counter #right p,
 .counter #wrong p {
+  font-size: 2.5rem;
+  margin: auto;
+}
+
+.counter #wrong2 {
+  display: none;
+}
+
+.multiCounter {
+  width: auto;
+  background-color: grey;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 1rem 0;
+}
+
+.multiCounter h2 {
+  margin: auto;
+}
+
+.multiCounter #right,
+.multiCounter #wrong,
+.multiCounter #wrong2 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: .5rem 5rem;
+  font-size: 2rem;
+  background-color: red;
+  border-radius: 2rem;
+  padding: 1rem;
+}
+
+.multiCounter #right p,
+.multiCounter #wrong p,
+.multiCounter #wrong2 p {
   font-size: 2.5rem;
   margin: auto;
 }
