@@ -6,7 +6,7 @@ function loadCards() {
     const cards = document.querySelectorAll(".card");
     start(cards);
 
-    console.log("Karten wurden geladen.");
+    console.log(msg.loadCards);
 }
 
 function Array2D(x, y){

@@ -129,7 +129,6 @@ function timer() {
     let timerElement = document.getElementById("timer");
     let interval;
 
-    let timerMsgPrefix = "Game time: ";
     let timerMsg = "";
 
     startTimer(interval);
@@ -150,9 +149,9 @@ function timer() {
                 }
 
                 if (hour > 0) {
-                    timerMsg = timerMsgPrefix + hour + " h " + minute + " m " + second + " s.";
+                    timerMsg = msg.gameTime + " " + hour + " " + msg.hours + " " + minute + " " + msg.minutes + " " + second + " " + msg.seconds;
                 } else {
-                    timerMsg = timerMsgPrefix + minute + " m " + second + " s.";
+                    timerMsg = msg.gameTime + " " + minute + " " + msg.minutes + " " + second + " " + msg.seconds;
                 }
 
                 timerElement.innerHTML = timerMsg;
@@ -197,13 +196,13 @@ function checkCards(cardOne, cardTwo) {
 
         if(game.getActivePlayer() == game.getPlayerOne()) {
             game.getPlayerOne().addAttempt(true);
-            console.log("Spieler 1 hat einen Punkt erhalten.");
             document.getElementById("test1").innerHTML = "[DEBUG] Spieler 1: " + game.getPlayerOne().getPoints(); /* SPÄTER ENTFERNEN */
         } else {
             game.getPlayerTwo().addAttempt(true);
-            console.log("Spieler 2 hat einen Punkt erhalten.");
             document.getElementById("test2").innerHTML = "[DEBUG] Spieler 2: " + game.getPlayerTwo().getPoints(); /* SPÄTER ENTFERNEN */
         }
+
+        console.log(msg.playerGetPoint(game.getActivePlayer().getName()));
 
         game.getCard(cardOne.getX(), cardOne.getY()).lock();
         game.getCard(cardTwo.getX(), cardTwo.getY()).lock();
@@ -216,7 +215,13 @@ function checkCards(cardOne, cardTwo) {
         }
 
     } else {
-        console.log("Spieler " + game.getActivePlayer().getName() + " hat eine falsche Kombination.");
+        if(game.getActivePlayer() == game.getPlayerOne()) {
+            game.getPlayerOne().addAttempt(false);
+        } else {
+            game.getPlayerTwo().addAttempt(false);
+        }
+
+        console.log(msg.wrongCouple(game.getActivePlayer().getName()));
         game.changePlayer();
 
         setTimeout(function() {
@@ -242,17 +247,20 @@ function stop() {
 
     if (game.getPlayerOne().getPoints() > game.getPlayerTwo().getPoints()) {
         /* Spieler 1 gewinnt */
-        console.log("Spieler 1 (" + game.getPlayerOne().getName() + ") hat gewonnen.");
+        console.log(msg.gameWin(game.getPlayerOne().getName()));
 
     } else if (game.getPlayerOne().getPoints() < game.getPlayerTwo().getPoints()) {
         /* Spieler 2 gewinnt */
-        console.log("Spieler 2 (" + game.getPlayerTwo().getName() + ") hat gewonnen.");
+        console.log(msg.gameWin(game.getPlayerTwo().getName()));
 
     } else {
         /* Unentschieden */
-        console.log("Unentschieden, kein Spieler hat gewonnen.");
+        console.log(msg.gameDraw);
 
     }
+
+    console.log(msg.gameWinInfo(game.getPlayerOne()));
+    console.log(msg.gameWinInfo(game.getPlayerTwo()));
 }
 
 /* 
