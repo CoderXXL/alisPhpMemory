@@ -78,6 +78,6 @@ class Game {
             this.#activePlayer = this.#player[0]
         }
 
-        document.getElementById("activePlayer").innerHTML =  "Akiver Spieler: " + game.getActivePlayer().getName();
-    }   
+        document.getElementById("activePlayer").innerHTML = "Akiver Spieler: " + game.getActivePlayer().getName();
+    }
 }
