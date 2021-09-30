@@ -10,7 +10,7 @@ function start(cards) {
             card.classList.add("Y" + y);
 
             game.saveCard(card, x, y);
-            
+
             count++;
         }
     }
@@ -30,8 +30,9 @@ function start(cards) {
 
     /* set playernames */
 
-
+    
     /* set number Couples */
+
 
     /* start game time */
     timer();
@@ -137,7 +138,7 @@ function timer() {
                 if (game.getStatus() == 4) clearInterval(interval);
 
                 second++;
-        
+
                 if(second == 60){
                     minute++;
                     second = 0;
@@ -158,46 +159,10 @@ function timer() {
     }
 }
 
-/* 
+/*
 
-card click 
+card click
 
-
-
-function flipCard(card, front) {
-    let interval;
-    let count = 0;
-
-    if(front) {
-        count = 180;
-    }
-
-    interval = setInterval(function() {
-        if(front) {
-            count -= 18;
-        } else {
-            count += 18;
-        }
-
-        if(count >= 0 && count <= 90) {
-            card.getElement().style.transform = "rotateY(" + count + "deg)";
-
-            if(count == 90) {
-                if(front) {
-                    card.getElement().style.background = null;
-                } else {
-                    card.getElement().style.background = card.getColor();
-                }
-            }
-        } else if (count > 90 && count <=180) {
-            card.getElement().style.transform = "rotateY(" + count + "deg)";
-        } else {
-            clearInterval(interval);
-        }
-
-    },40);
-
-}
 */
 
 function moveOne(card) {
@@ -207,7 +172,7 @@ function moveOne(card) {
 
     setTimeout(function() {
         card.getElement().style.background = card.getColor();
-    }, 900);
+    }, 300);
 
     game.setCardOne(card);
     game.setStatus(2);
@@ -221,7 +186,7 @@ function moveTwo(card) {
 
     setTimeout(function() {
         card.getElement().style.background = card.getColor();
-    }, 900);
+    }, 300);
 
     game.setCardTwo(card);
     game.setStatus(3);
@@ -230,7 +195,7 @@ function moveTwo(card) {
 }
 
 function checkCards(cardOne, cardTwo) {
-    
+
     if(cardOne.getColor() == cardTwo.getColor()) {
 
         if(game.getActivePlayer() == game.getPlayerOne()) {
@@ -261,7 +226,6 @@ function checkCards(cardOne, cardTwo) {
         }
 
         console.log(msg.wrongCouple(game.getActivePlayer().getName()));
-        game.changePlayer();
 
         setTimeout(function() {
             cardOne.getElement().classList.replace("front", "back");
@@ -270,8 +234,9 @@ function checkCards(cardOne, cardTwo) {
             setTimeout(function() {
                 cardOne.getElement().style.background = null;
                 cardTwo.getElement().style.background = null;
-            }, 900);
+            }, 300);
 
+            game.changePlayer();
             game.setStatus(1);
         }, 2000);
     }
