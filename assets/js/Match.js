@@ -54,8 +54,8 @@ additonal start funktions
 function addClickEvent(card) {
     if(!card.classList.contains("card")) return;
 
-    x = card.classList[1].substring(1, card.classList[1].length)
-    y = card.classList[2].substring(1, card.classList[2].length);
+    x = card.classList[2].substring(1, card.classList[1].length)
+    y = card.classList[3].substring(1, card.classList[2].length);
 
     gameCard = game.getCard(x, y);
 
@@ -162,12 +162,52 @@ function timer() {
 
 card click 
 
+
+
+function flipCard(card, front) {
+    let interval;
+    let count = 0;
+
+    if(front) {
+        count = 180;
+    }
+
+    interval = setInterval(function() {
+        if(front) {
+            count -= 18;
+        } else {
+            count += 18;
+        }
+
+        if(count >= 0 && count <= 90) {
+            card.getElement().style.transform = "rotateY(" + count + "deg)";
+
+            if(count == 90) {
+                if(front) {
+                    card.getElement().style.background = null;
+                } else {
+                    card.getElement().style.background = card.getColor();
+                }
+            }
+        } else if (count > 90 && count <=180) {
+            card.getElement().style.transform = "rotateY(" + count + "deg)";
+        } else {
+            clearInterval(interval);
+        }
+
+    },40);
+
+}
 */
 
 function moveOne(card) {
     if (card.isLocked()) return;
 
-    card.getElement().style.background = game.getCard(x, y).getColor();
+    card.getElement().classList.replace("back", "front");
+
+    setTimeout(function() {
+        card.getElement().style.background = card.getColor();
+    }, 900);
 
     game.setCardOne(card);
     game.setStatus(2);
@@ -177,7 +217,11 @@ function moveTwo(card) {
     if (card.isLocked()) return;
     if(card.getX() == game.getCardOne().getX() && card.getY() == game.getCardOne().getY()) return;
 
-    card.getElement().style.background = game.getCard(x, y).getColor();
+    card.getElement().classList.replace("back", "front");
+
+    setTimeout(function() {
+        card.getElement().style.background = card.getColor();
+    }, 900);
 
     game.setCardTwo(card);
     game.setStatus(3);
@@ -220,8 +264,13 @@ function checkCards(cardOne, cardTwo) {
         game.changePlayer();
 
         setTimeout(function() {
-            cardOne.getElement().style.background = null;
-            cardTwo.getElement().style.background = null;
+            cardOne.getElement().classList.replace("front", "back");
+            cardTwo.getElement().classList.replace("front", "back");
+
+            setTimeout(function() {
+                cardOne.getElement().style.background = null;
+                cardTwo.getElement().style.background = null;
+            }, 900);
 
             game.setStatus(1);
         }, 2000);

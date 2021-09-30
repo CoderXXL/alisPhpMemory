@@ -41,6 +41,7 @@ h1 {
 
 #matchfield {
     width: 600px;
+    position: relative;
 }
 
 .card {
@@ -52,6 +53,40 @@ h1 {
     margin: 10px;
     
     float: left;
+}
+
+.front {
+    animation-name: backToFront;
+    animation-duration: 3000ms;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+.back {
+    animation-name: frontToBack;
+    animation-duration: 3000ms;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes backToFront {
+    from {
+        transform: rotateY(0deg);
+      }
+    
+    to {
+        transform: rotateY(180deg);
+      }
+}
+
+@keyframes frontToBack {
+    from {
+        transform: rotateY(180deg);
+      }
+    
+    to {
+        transform: rotateY(0deg);
+      }
 }
 
 /* Footer */
