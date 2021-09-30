@@ -9,12 +9,17 @@ class message {
     minutes = "m";
     seconds = "s";
 
+
+    playerPoints(player) {
+        return "Punkte " + player.getName() + ": " + player.getPoints();;
+    }
     playerGetPoint(name) {
         return "Spieler \"" + name + "\" hat einen Punkt erhalten.";
     }
     wrongCouple(name) {
         return "Spieler \"" + name + "\" hat eine falsche Kombination.";
     }
+
 
     gameWin(name) {
         return "Spieler \"" + name + "\" hat gewonnen.";

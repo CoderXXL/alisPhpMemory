@@ -40,9 +40,8 @@ function start(cards) {
     game.changePlayer();
     game.setStatus(1);
 
-    document.getElementById("test1").innerHTML = "[DEBUG] Spieler 1: " + game.getPlayerOne().getPoints();
-    document.getElementById("test2").innerHTML = "[DEBUG] Spieler 2: " + game.getPlayerTwo().getPoints();
-    document.getElementById("test3").innerHTML = "[DEBUG] Game status: " + game.getStatus();
+    document.getElementById("pointsPlayerOne").innerHTML = msg.playerPoints(game.getPlayerOne())
+    document.getElementById("pointsPlayerTwo").innerHTML = msg.playerPoints(game.getPlayerTwo())
     /* SPÄTER ENTFERNEN */
 }
 
@@ -172,8 +171,6 @@ function moveOne(card) {
 
     game.setCardOne(card);
     game.setStatus(2);
-
-    document.getElementById("test3").innerHTML = "[DEBUG] Game status: " + game.getStatus(); /* SPÄTER ENTFERNEN */
 }
 
 function moveTwo(card) {
@@ -186,8 +183,6 @@ function moveTwo(card) {
     game.setStatus(3);
 
     checkCards(game.getCardOne(), game.getCardTwo());
-
-    document.getElementById("test3").innerHTML = "[DEBUG] Game status: " + game.getStatus(); /* SPÄTER ENTFERNEN */
 }
 
 function checkCards(cardOne, cardTwo) {
@@ -196,10 +191,10 @@ function checkCards(cardOne, cardTwo) {
 
         if(game.getActivePlayer() == game.getPlayerOne()) {
             game.getPlayerOne().addAttempt(true);
-            document.getElementById("test1").innerHTML = "[DEBUG] Spieler 1: " + game.getPlayerOne().getPoints(); /* SPÄTER ENTFERNEN */
+            document.getElementById("pointsPlayerOne").innerHTML = msg.playerPoints(game.getPlayerOne());
         } else {
             game.getPlayerTwo().addAttempt(true);
-            document.getElementById("test2").innerHTML = "[DEBUG] Spieler 2: " + game.getPlayerTwo().getPoints(); /* SPÄTER ENTFERNEN */
+            document.getElementById("pointsPlayerTwo").innerHTML = msg.playerPoints(game.getPlayerTwo());
         }
 
         console.log(msg.playerGetPoint(game.getActivePlayer().getName()));
@@ -229,11 +224,8 @@ function checkCards(cardOne, cardTwo) {
             cardTwo.getElement().style.background = null;
 
             game.setStatus(1);
-            document.getElementById("test3").innerHTML = "[DEBUG] Game status: " + game.getStatus(); /* SPÄTER ENTFERNEN */
         }, 2000);
     }
-
-    document.getElementById("test3").innerHTML = "[DEBUG] Game status: " + game.getStatus(); /* SPÄTER ENTFERNEN */
 }
 
 /* 
