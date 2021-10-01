@@ -4,6 +4,14 @@ window.onload = function() {
     button.addEventListener("click", function () {
         startMemory();
     });
+
+    const form = document.getElementById("playerName");
+
+    form.addEventListener("keyup", event => {
+        if (event.keyCode == 13) {
+            document.getElementById("startMemory").click();
+        }
+    });
 }
 
 function loadCards() {
@@ -36,35 +44,56 @@ function startMemory() {
     let htmlElement;
 
     if (createGameStatus == 0) {
+        
         htmlElement = document.getElementById("startMemory");
         htmlElement.innerHTML = "Weiter";
+        htmlElement.style.top = "0px";
 
         htmlElement = document.getElementById("playerName");
-        htmlElement.style.visibility = "visible";
+        htmlElement.classList.replace("hide", "show");
     
+        htmlElement = document.getElementById("createGameText");
+        htmlElement.innerHTML = "Gebe den Namen für Spieler 1 ein:";
+
         createGameStatus++;
 
     } else if (createGameStatus == 1) {
         htmlElement = document.getElementById("playerName");
+
+        if (!htmlElement.value) return;
+
         playerOne = new Player(htmlElement.value);
         htmlElement.value = "";
+
+        htmlElement = document.getElementById("createGameText");
+        htmlElement.innerHTML = "Gebe den Namen für Spieler 2 ein:";
 
         createGameStatus++;
 
     } else if (createGameStatus == 2) {
         htmlElement = document.getElementById("playerName");
+
+        if (!htmlElement.value) return;
+
         playerTwo = new Player(htmlElement.value);
-        htmlElement.style.visibility = "hidden";
+        htmlElement.classList.replace("show", "hide");
 
         htmlElement = document.getElementById("startForm");
-        htmlElement.style.visibility = "hidden";
+        htmlElement.classList.replace("show", "hide");
 
         htmlElement = document.getElementById("cards");
-        htmlElement.style.visibility = "visible";
+        htmlElement.classList.replace("hide", "show");
+
+        htmlElement = document.getElementById("createGameText");
+        htmlElement.classList.replace("show", "hide");
+
+        htmlElement = document.getElementById("startMemory");
+        htmlElement.classList.replace("show", "hide");
 
         game = new Game(playerOne, playerTwo);
 
         loadCards();
     }
-}
 
+     /* set number Couples */
+}

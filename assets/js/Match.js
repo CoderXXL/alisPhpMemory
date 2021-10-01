@@ -22,28 +22,19 @@ function start(cards) {
         addClickEvent(event.target);
     });
 
-    /* set active player none */
-    document.getElementById("activePlayer").innerHTML += "-";
-
     /* random card colors */
     cardColors();
-
-    /* set playernames */
-
-    
-    /* set number Couples */
-
 
     /* start game time */
     timer();
 
-    /* SPÄTER ENTFERNEN */
+    /* game info */
     game.changePlayer();
-    game.setStatus(1);
-
     document.getElementById("pointsPlayerOne").innerHTML = msg.playerPoints(game.getPlayerOne())
     document.getElementById("pointsPlayerTwo").innerHTML = msg.playerPoints(game.getPlayerTwo())
-    /* SPÄTER ENTFERNEN */
+
+    /* start game */
+    game.setStatus(1);
 }
 
 /* 
@@ -267,6 +258,9 @@ function stop() {
 
     console.log(msg.gameWinInfo(game.getPlayerOne()));
     console.log(msg.gameWinInfo(game.getPlayerTwo()));
+
+
+    
 }
 
 /* 
