@@ -13,6 +13,8 @@ function loadCards() {
     console.log(msg.loadCards);
 }
 
+/* 2d array funktion */
+
 function Array2D(x, y){
     this.items = new Array(y);
     for(i = 0; i < x; i++){
@@ -31,39 +33,26 @@ let playerTwo;
 let game;
 
 function startMemory() {
-    /* 
-        status 0:   - startMemory = hidden
-                    - namePlayerOne = visible
-
-        status 1:   - namePlayerOne
-
-        status 2:   - namePlayerTwo
-                    - cards = visible
-    */
-
     let htmlElement;
 
     if (createGameStatus == 0) {
         htmlElement = document.getElementById("startMemory");
         htmlElement.innerHTML = "Weiter";
 
-        htmlElement = document.getElementById("namePlayerOne");
+        htmlElement = document.getElementById("playerName");
         htmlElement.style.visibility = "visible";
     
         createGameStatus++;
 
     } else if (createGameStatus == 1) {
-        htmlElement = document.getElementById("namePlayerOne");
+        htmlElement = document.getElementById("playerName");
         playerOne = new Player(htmlElement.value);
-        htmlElement.style.visibility = "hidden";
-
-        htmlElement = document.getElementById("namePlayerTwo");
-        htmlElement.style.visibility = "visible";
+        htmlElement.value = "";
 
         createGameStatus++;
 
     } else if (createGameStatus == 2) {
-        htmlElement = document.getElementById("namePlayerTwo");
+        htmlElement = document.getElementById("playerName");
         playerTwo = new Player(htmlElement.value);
         htmlElement.style.visibility = "hidden";
 

@@ -70,7 +70,7 @@
         top: 200px;
     }
 
-    #namePlayerOne, #namePlayerTwo {
+    #playerName {
         position: relative;
         height: 20px;
         width: 200px;
