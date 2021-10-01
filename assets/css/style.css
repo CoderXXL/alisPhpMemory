@@ -12,6 +12,16 @@
         flex-direction: column;
     }
 
+    #matchfield {
+        width: 600px;
+        position: relative;
+        background-color: white;
+
+        border-style: solid;
+        border-width: 0px 20px;
+        border-color: lightskyblue;
+    }
+
     /* Header */
 
     header {
@@ -52,16 +62,37 @@
         float: right;
     }
 
+    /* Start Form */
+
+    #startForm {
+        position: absolute;
+        left: 200px;
+        top: 200px;
+    }
+
+    #namePlayerOne, #namePlayerTwo {
+        position: relative;
+        height: 20px;
+        width: 200px;
+
+        margin-bottom: 10px;
+
+        visibility: hidden;
+    }
+
+    #startMemory {
+        position: relative;
+        height: 50px;
+        width: 200px;
+
+        background-color: lightskyblue;
+        border: none;
+    }
+
     /* Cards */
 
-    #matchfield {
-        width: 600px;
-        position: relative;
-        background-color: white;
-
-        border-style: solid;
-        border-width: 0px 20px;
-        border-color: lightskyblue;
+    #cards {
+        visibility: hidden;
     }
 
     .card {

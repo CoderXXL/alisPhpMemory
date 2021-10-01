@@ -274,8 +274,3 @@ function stop() {
 create new game 
 
 */
-
-let playerOne = new Player("Player 1");
-let playerTwo = new Player("Player 2");
-
-let game = new Game(playerOne, playerTwo);
