@@ -41,6 +41,7 @@ let game;
 
 function startMemory() {
     let htmlElement;
+    let name = "";
 
     if (createGameStatus == 0) {
         
@@ -58,8 +59,10 @@ function startMemory() {
 
     } else if (createGameStatus == 1) {
         htmlElement = document.getElementById("playerName");
+        name = htmlElement.value;
 
-        if (!htmlElement.value) return;
+        if (!name) return;
+        if (name.length > 15)  return;
 
         playerOne = new Player(htmlElement.value);
         htmlElement.value = "";
@@ -71,8 +74,10 @@ function startMemory() {
 
     } else if (createGameStatus == 2) {
         htmlElement = document.getElementById("playerName");
+        name = htmlElement.value;
 
-        if (!htmlElement.value) return;
+        if (!name) return;
+        if (name.length > 15) return;
 
         playerTwo = new Player(htmlElement.value);
         htmlElement.classList.replace("show", "hide");
