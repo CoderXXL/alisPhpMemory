@@ -7,10 +7,8 @@ window.onload = function() {
 
     const form = document.getElementById("playerName");
 
-    form.addEventListener("keyup", event => {
-        if (event.keyCode == 13) {
-            document.getElementById("startMemory").click();
-        }
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
     });
 }
 
@@ -83,12 +81,6 @@ function startMemory() {
 
         htmlElement = document.getElementById("cards");
         htmlElement.classList.replace("hide", "show");
-
-        htmlElement = document.getElementById("createGameText");
-        htmlElement.classList.replace("show", "hide");
-
-        htmlElement = document.getElementById("startMemory");
-        htmlElement.classList.replace("show", "hide");
 
         game = new Game(playerOne, playerTwo);
 

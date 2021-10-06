@@ -19,18 +19,20 @@
         </header>
 
         <div class="match">
-            <div class="gameInfo">
+            <div class="gameInfoPlayer">
                 <p id="activePlayer">Aktiver Spieler:</p>
+            </div>
+            <div class="gameInfoTimer">
                 <p id="timer">Spielzeit: 0m 0s</p>
             </div>
 
             <section id="matchfield">
         
-                <div id="startForm">
-                    <p id="createGameText" class="show">Starte das Spiel, wenn du Memory spielen möchtest:</p>
+                <div id="startForm" class="show">
+                    <p id="createGameText">Starte das Spiel, wenn du Memory spielen möchtest:</p>
                     <form name="createGame">
                         <input type="text" id="playerName" class="hide"><br>
-                        <button type="button" id="startMemory" class="show">Spiel starten!</button>
+                        <button type="button" id="startMemory">Spiel starten!</button>
                     </form>
                 </div>
 
@@ -62,8 +64,10 @@
         
             </section>
         
-            <div class="gameInfo">
-                <p id="pointsPlayerOne">Punkte Spieler 1: 0</p>
+            <div class="gameInfoPlayerOne">
+                 <p id="pointsPlayerOne">Punkte Spieler 1: 0</p>
+             </div>
+            <div class="gameInfoPlayerTwo">
                 <p id="pointsPlayerTwo">Punkte Spieler 2: 0</p>
             </div>
         </div>
