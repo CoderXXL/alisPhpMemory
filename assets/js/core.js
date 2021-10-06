@@ -5,10 +5,11 @@ window.onload = function() {
         startMemory();
     });
 
-    const form = document.getElementById("playerName");
+    let form = document.getElementById("createGame");
 
     form.addEventListener("submit", function (event) {
         event.preventDefault();
+        document.getElementById("startMemory").click();
     });
 }
 
