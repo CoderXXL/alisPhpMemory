@@ -322,10 +322,7 @@ function stop() {
     }
 
     console.log(msg.gameWinInfo(game.getPlayerOne()));
-    console.log(msg.gameWinInfo(game.getPlayerTwo()));
-
-
-    
+    console.log(msg.gameWinInfo(game.getPlayerTwo()));    
 }
 
 /* 

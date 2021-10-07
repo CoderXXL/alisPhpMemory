@@ -68,8 +68,9 @@ function startMemory() {
     } else if (createGameStatus == 1) {
         htmlElement = document.getElementById("playerName");
         let name = htmlElement.value;
-
+        
         if (!name) return;
+        if(!checkName(name)) return;
         if (name.length > 15)  return;
 
         playerOne = new Player(htmlElement.value);
@@ -85,6 +86,7 @@ function startMemory() {
         let name = htmlElement.value;
 
         if (!name) return;
+        if(!checkName(name)) return;
         if (name.length > 15) return;
 
         playerTwo = new Player(htmlElement.value);
@@ -124,7 +126,13 @@ function startMemory() {
         loadCards();
     }
 
-     /* set number Couples */
+    function checkName(name) {
+        let test = /[^A-z0-9_\-]/;
+        if (test.exec(name)) {
+            return false; 
+        } 
+        return true;
+    }
 }
 
 
