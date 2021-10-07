@@ -1,18 +1,11 @@
 function start(cards) {
     /* create cards */
-    let count = 0;
 
-    for (y = 0; y < 4; y++) {
-        for (x = 0; x < 5; x++) {
-            let card = cards[count];
+    for (let id = 0; id < (game.getNumberCouples() * 2); id++) {
+            let card = cards[id];
 
-            card.classList.add("X" + x);
-            card.classList.add("Y" + y);
-
-            game.saveCard(card, x, y);
-
-            count++;
-        }
+            card.id = "card" + id;
+            game.saveCard(card, id);
     }
 
     /* add click event */
@@ -44,14 +37,13 @@ additonal start funktions
 */
 
 function addClickEvent(card) {
-    if(!card.classList.contains("card")) return;
+    if (!card.classList.contains("card")) return;
 
-    x = card.classList[2].substring(1, card.classList[1].length)
-    y = card.classList[3].substring(1, card.classList[2].length);
+    id = card.id.substring(4, card.id.length);
 
-    gameCard = game.getCard(x, y);
+    gameCard = game.getCard(id);
 
-    if(game.getStatus() == 1) {
+    if (game.getStatus() == 1) {
         moveOne(gameCard);
     } else if (game.getStatus() == 2) {
         moveTwo(gameCard);
@@ -94,21 +86,19 @@ function cardColors() {
     colors.items[9][0] = "pink";
     colors.items[9][1] = 0;
 
-    for (y = 0; y < 4; y++) {
-        for (x = 0; x < 5; x++) {
-            game.getCard(x, y).setColor(generateColor());
-        }
+    for (let id = 0; id < (game.getNumberCouples() * 2); id++) {
+        game.getCard(id).setColor(generateColor());
     }
 
     function generateColor() {
-                let random = Math.floor(Math.random() * max);
+        let random = Math.floor(Math.random() * max);
 
-                if (colors.items[random][1] >= min) {
-                    return generateColor();
-                } else {
-                    colors.items[random][1] = colors.items[random][1] + 1;
-                    return colors.items[random][0];
-                }
+        if (colors.items[random][1] >= min) {
+            return generateColor();
+        } else {
+            colors.items[random][1] = colors.items[random][1] + 1;
+            return colors.items[random][0];
+        }
     }
 }
 
@@ -171,7 +161,7 @@ function moveOne(card) {
 
 function moveTwo(card) {
     if (card.isLocked()) return;
-    if(card.getX() == game.getCardOne().getX() && card.getY() == game.getCardOne().getY()) return;
+    if (card.getID() == game.getCardOne().getID()) return;
 
     card.getElement().classList.replace("back", "front");
 
@@ -187,9 +177,9 @@ function moveTwo(card) {
 
 function checkCards(cardOne, cardTwo) {
 
-    if(cardOne.getColor() == cardTwo.getColor()) {
+    if (cardOne.getColor() == cardTwo.getColor()) {
 
-        if(game.getActivePlayer() == game.getPlayerOne()) {
+        if (game.getActivePlayer() == game.getPlayerOne()) {
             game.getPlayerOne().addAttempt(true);
             document.getElementById("pointsPlayerOne").innerHTML = msg.playerPoints(game.getPlayerOne());
         } else {
@@ -199,10 +189,10 @@ function checkCards(cardOne, cardTwo) {
 
         console.log(msg.playerGetPoint(game.getActivePlayer().getName()));
 
-        game.getCard(cardOne.getX(), cardOne.getY()).lock();
-        game.getCard(cardTwo.getX(), cardTwo.getY()).lock();
+        game.getCard(cardOne.getID()).lock();
+        game.getCard(cardTwo.getID()).lock();
 
-        if((game.getPlayerOne().getPoints() + game.getPlayerTwo().getPoints()) == game.getNumberCouples()) {
+        if ((game.getPlayerOne().getPoints() + game.getPlayerTwo().getPoints()) == game.getNumberCouples()) {
             stop();
 
         } else {
@@ -210,7 +200,7 @@ function checkCards(cardOne, cardTwo) {
         }
 
     } else {
-        if(game.getActivePlayer() == game.getPlayerOne()) {
+        if (game.getActivePlayer() == game.getPlayerOne()) {
             game.getPlayerOne().addAttempt(false);
         } else {
             game.getPlayerTwo().addAttempt(false);

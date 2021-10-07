@@ -2,11 +2,11 @@ class Game {
     #activePlayer = new Player("playerNone");
     #player = new Array(2);
 
-    #cards = new Array2D(5, 4);
+    #numberCouples;
+
+    #cards = new Array(0);
     #cardOne;
     #cardTwo;
-
-    #numberCouples = 10
 
     /* 
         Status 0: Spielbeginn
@@ -18,9 +18,10 @@ class Game {
 
     #status = 0;
 
-    constructor(playerOne, playerTwo) {
+    constructor(playerOne, playerTwo, numberCouples) {
         this.#player[0] = playerOne;
         this.#player[1] = playerTwo;
+        this.#numberCouples = numberCouples;
     }
 
     getNumberCouples() {
@@ -51,12 +52,15 @@ class Game {
         this.#cardTwo = card;
     }
 
-    getCard(x, y) {
-        return this.#cards.items[x][y];
+    getCard(id) {
+        for(let i = 0; i < this.#cards.length; i++) {
+            if(this.#cards[i].getID() == id) return this.#cards[i];
+        }
+        return null;
     }
 
-    saveCard(card, x, y) {
-        this.#cards.items[x][y] = new Card(card, x, y);
+    saveCard(card, id) {
+        this.#cards[this.#cards.length] = new Card(card, id);
     }
 
     getActivePlayer(){

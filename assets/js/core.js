@@ -15,6 +15,8 @@ window.onload = function() {
 
 function loadCards() {
     const cards = document.querySelectorAll(".card");
+    
+    cards[0].id = "test";
     start(cards);
 
     console.log(msg.loadCards);
@@ -24,7 +26,7 @@ function loadCards() {
 
 function Array2D(x, y){
     this.items = new Array(y);
-    for(i = 0; i < x; i++){
+    for (let i = 0; i < x; i++){
         this.items[i] = new Array(x);
     }
 }
@@ -32,6 +34,12 @@ function Array2D(x, y){
 
 /* create game */
 
+/*  
+    0: Start
+    1: name playerOne
+    2: name playerTwo
+    3: select couples //in work
+*/
 let createGameStatus = 0;
 
 let playerOne;
@@ -88,10 +96,43 @@ function startMemory() {
         htmlElement = document.getElementById("cards");
         htmlElement.classList.replace("hide", "show");
 
-        game = new Game(playerOne, playerTwo);
+        game = new Game(playerOne, playerTwo, 10);
 
         loadCards();
     }
 
      /* set number Couples */
+}
+
+
+function eatSomeCookies() {
+    create();
+    function create() {
+        let date = new Date();
+        date = new Date(date.getTime() + 1000*60*60*24*365);
+        
+        console.log("" + date.toGMTString());
+
+        let name = "test";
+        let path = "/"
+        let domain = "heroesofgamers.de";
+
+        //document.cookie = "name=" + name + "; max-age=" + date.toGMTString() + "; path=" + path + "; domain=" + domain + ";";
+
+        document.cookie = "name=oeschger; SameSite=None; Secure";
+        document.cookie = "favorite_food=tripe; SameSite=None; Secure";
+        
+        console.log(document.cookie);
+    }
+
+    get();
+    function get() {
+        let cookies = document.cookie;
+
+        let cookieList = cookies.split(";");
+        
+        for(i = 0; i < cookieList.length; i++) {
+            console.log(i + ": " + cookieList[i].substring(0, cookieList[i].indexOf("=")) + "  CookieList.lenght: " + cookieList.length);
+        }
+    }
 }

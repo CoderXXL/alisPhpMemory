@@ -1,13 +1,12 @@
 class Card {
     #locked = false;
     #color = "black";
-    #position = new Array(2);
+    #id;
     #element;
 
-    constructor(card, x, y) {
+    constructor(card, id) {
         this.#element = card;
-        this.#position[0] = x;
-        this.#position[1] = y;
+        this.#id = id;
     }
 
     isLocked() {
@@ -22,12 +21,8 @@ class Card {
         return this.#element;
     }
 
-    getX() {
-        return this.#position[0];
-    }
-
-    getY() {
-        return this.#position[1];
+    getID() {
+        return this.#id;
     }
 
     getColor() {
