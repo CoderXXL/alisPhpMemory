@@ -54,20 +54,20 @@ function startMemory() {
     if (createGameStatus == 0) {
         
         htmlElement = document.getElementById("startMemory");
-        htmlElement.innerHTML = "Weiter";
+        htmlElement.innerHTML = msg.goOn;
         htmlElement.style.top = "0px";
 
         htmlElement = document.getElementById("playerName");
         htmlElement.classList.replace("hide", "show");
     
         htmlElement = document.getElementById("createGameText");
-        htmlElement.innerHTML = "Gebe den Namen für Spieler 1 ein:";
+        htmlElement.innerHTML = msg.setPlayerNameOne;
 
         createGameStatus++;
 
     } else if (createGameStatus == 1) {
         htmlElement = document.getElementById("playerName");
-        name = htmlElement.value;
+        let name = htmlElement.value;
 
         if (!name) return;
         if (name.length > 15)  return;
@@ -76,18 +76,33 @@ function startMemory() {
         htmlElement.value = "";
 
         htmlElement = document.getElementById("createGameText");
-        htmlElement.innerHTML = "Gebe den Namen für Spieler 2 ein:";
+        htmlElement.innerHTML = msg.setPlayerNameTwo;
 
         createGameStatus++;
 
     } else if (createGameStatus == 2) {
         htmlElement = document.getElementById("playerName");
-        name = htmlElement.value;
+        let name = htmlElement.value;
 
         if (!name) return;
         if (name.length > 15) return;
 
         playerTwo = new Player(htmlElement.value);
+        htmlElement.value = "";
+
+        htmlElement = document.getElementById("createGameText");
+        htmlElement.innerHTML = msg.countCouples;
+
+        createGameStatus++;
+
+    } else if (createGameStatus == 3) {
+        htmlElement = document.getElementById("playerName");
+        let count = parseInt(htmlElement.value);
+        
+        if (!Number.isInteger(count)) return;
+        //if (count % 2 != 0) return;
+        if (count > 30 || count < 2) return;
+
         htmlElement.classList.replace("show", "hide");
 
         htmlElement = document.getElementById("startForm");
@@ -96,7 +111,15 @@ function startMemory() {
         htmlElement = document.getElementById("cards");
         htmlElement.classList.replace("hide", "show");
 
-        game = new Game(playerOne, playerTwo, 10);
+        let div;
+        for (let i = 0; i < (count * 2); i++) {
+            div = document.createElement("div");
+            div.classList.add("card");
+            div.classList.add("back");
+            document.getElementById("cards").appendChild(div);
+        }
+
+        game = new Game(playerOne, playerTwo, count);
 
         loadCards();
     }

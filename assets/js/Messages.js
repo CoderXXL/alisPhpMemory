@@ -9,6 +9,11 @@ class message {
     minutes = "m";
     seconds = "s";
 
+    goOn = "Weiter";
+    setPlayerNameOne = "Gebe den Namen für Spieler 1 ein:";
+    setPlayerNameTwo = "Gebe den Namen für Spieler 2 ein:";
+    countCouples = "Git die Anzahl der Kartenpaare ein (Zwischen 2 und 30):";
+
 
     playerPoints(player) {
         return "Punkte " + player.getName() + ": " + player.getPoints();;
