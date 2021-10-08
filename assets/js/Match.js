@@ -309,12 +309,12 @@ function stop() {
 
     if (game.getPlayerOne().getPoints() > game.getPlayerTwo().getPoints()) {
         /* Spieler 1 gewinnt */
-        saveHighscore(game.getPlayerOne().getName(), game.getPlayerOne().getPoints(), "33m 54s");
+        saveHighscore(game.getPlayerOne().getName(), game.getPlayerOne().getPoints(), game.getNumberCouples(), "33m 54s");
         console.log(msg.gameWin(game.getPlayerOne().getName()));
 
     } else if (game.getPlayerOne().getPoints() < game.getPlayerTwo().getPoints()) {
         /* Spieler 2 gewinnt */
-        saveHighscore(game.getPlayerTwo().getName(), game.getPlayerTwo().getPoints(), "14m 32s");
+        saveHighscore(game.getPlayerTwo().getName(), game.getPlayerTwo().getPoints(), game.getNumberCouples(), "14m 32s");
         console.log(msg.gameWin(game.getPlayerTwo().getName()));
 
     } else {
@@ -327,9 +327,10 @@ function stop() {
     console.log(msg.gameWinInfo(game.getPlayerTwo()));    
 }
 
-function saveHighscore(name, score, time) {
+function saveHighscore(name, score, couples, time) {
 
-    let newScore = {"name":name,"score":score,"time":time};
+    let newScore = {"name":name,"score":score,"couples":couples,"time":time};
+    let cookie = new Cookie("highscore");
     let highscore;
     let obj;
 
@@ -350,8 +351,53 @@ function saveHighscore(name, score, time) {
     obj = JSON.parse(highscore);
     obj.highscore.push(newScore);
 
-    let cookie = new Cookie("highscore");
-    cookie.setValue(JSON.stringify(obj));
-    cookie.setMaxAge("31536000");
+    obj = sort(obj);
 
+    if (obj.highscore.length > 4) {
+        obj.highscore.pop();
+    }
+
+    /* set cookie */
+    cookie.setMaxAge("31536000");
+    cookie.setValue(JSON.stringify(obj));
+
+    /* sort highscore array */
+    function sort(obj) {
+        let save;
+
+        for (let i = 0; i < obj.highscore.length - 1; i++) {
+            console.log("couples - 1: " + obj.highscore[i].couples + " 2: " + obj.highscore[i+1].couples);
+
+            if (obj.highscore[i].couples < obj.highscore[i+1].couples) {
+                console.log("<")
+                save = obj.highscore[i];
+                obj.highscore[i] = obj.highscore[i+1];
+                obj.highscore[i+1] = save;
+                i = -1;
+
+            } else if (obj.highscore[i].couples == obj.highscore[i+1].couples) {
+                console.log("=")
+                console.log("score - 1: " + obj.highscore[i].score + " 2: " + obj.highscore[i+1].score);
+
+                if (obj.highscore[i].score < obj.highscore[i+1].score) {
+                    console.log("<")
+                    save = obj.highscore[i];
+                    obj.highscore[i] = obj.highscore[i+1];
+                    obj.highscore[i+1] = save;
+                    i = -1;
+                
+                } else if (obj.highscore[i].score == obj.highscore[i+1].score) {
+                    console.log("=")
+
+                } else {
+                    console.log(">")
+                }
+
+            } else {
+                console.log(">")
+            }
+        }
+
+        return obj;
+    }
 }
