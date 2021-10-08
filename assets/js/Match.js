@@ -309,10 +309,12 @@ function stop() {
 
     if (game.getPlayerOne().getPoints() > game.getPlayerTwo().getPoints()) {
         /* Spieler 1 gewinnt */
+        saveHighscore(game.getPlayerOne().getName(), game.getPlayerOne().getPoints(), "33m 54s");
         console.log(msg.gameWin(game.getPlayerOne().getName()));
 
     } else if (game.getPlayerOne().getPoints() < game.getPlayerTwo().getPoints()) {
         /* Spieler 2 gewinnt */
+        saveHighscore(game.getPlayerTwo().getName(), game.getPlayerTwo().getPoints(), "14m 32s");
         console.log(msg.gameWin(game.getPlayerTwo().getName()));
 
     } else {
@@ -325,8 +327,31 @@ function stop() {
     console.log(msg.gameWinInfo(game.getPlayerTwo()));    
 }
 
-/* 
+function saveHighscore(name, score, time) {
 
-create new game 
+    let newScore = {"name":name,"score":score,"time":time};
+    let highscore;
+    let obj;
 
-*/
+    if (hasCookie("highscore")) {
+        let cookies = getCookies();
+    
+        for(let i = 0; i < cookies.items.length; i++) {
+            if (cookies.items[i][0] == "highscore") {
+                highscore = cookies.items[i][1];
+                i = cookies.items.length;
+            }
+        }
+
+    } else {
+        highscore = '{"highscore":[]}';
+    }
+
+    obj = JSON.parse(highscore);
+    obj.highscore.push(newScore);
+
+    let cookie = new Cookie("highscore");
+    cookie.setValue(JSON.stringify(obj));
+    cookie.setMaxAge("31536000");
+
+}

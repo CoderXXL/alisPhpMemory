@@ -11,6 +11,10 @@ window.onload = function() {
         event.preventDefault();
         document.getElementById("startMemory").click();
     });
+
+    //DEBUG
+    //eatSomeCookies();
+    //jsonTest();
 }
 
 function loadCards() {
@@ -38,7 +42,7 @@ function Array2D(x, y){
     0: Start
     1: name playerOne
     2: name playerTwo
-    3: select couples //in work
+    3: select couples
 */
 let createGameStatus = 0;
 
@@ -64,6 +68,9 @@ function startMemory() {
         htmlElement.innerHTML = msg.setPlayerNameOne;
 
         createGameStatus++;
+
+        //DEBUG
+        //changeCookie();
 
     } else if (createGameStatus == 1) {
         htmlElement = document.getElementById("playerName");
@@ -127,7 +134,7 @@ function startMemory() {
     }
 
     function checkName(name) {
-        let test = /[^A-z0-9_\-]/;
+        let test = /[^A-z0-9]/;
         if (test.exec(name)) {
             return false; 
         } 
@@ -136,34 +143,64 @@ function startMemory() {
 }
 
 
-function eatSomeCookies() {
-    create();
-    function create() {
-        let date = new Date();
-        date = new Date(date.getTime() + 1000*60*60*24*365);
-        
-        console.log("" + date.toGMTString());
+/*function eatSomeCookies() {
+    document.cookie = "cookie=test; max-age=31536000; Secure";
 
-        let name = "test";
-        let path = "/"
-        let domain = "heroesofgamers.de";
+    let date = new Date();
+    date = new Date(date.getTime() + 60*60*24*365);
 
-        //document.cookie = "name=" + name + "; max-age=" + date.toGMTString() + "; path=" + path + "; domain=" + domain + ";";
+    let cookieTest = new Cookie("cookieTest");
+    cookieTest.setValue("Schokolade");
+    //cookieTest.setMaxAge("31536000");
+    cookieTest.setExpires(date.toUTCString());
+    cookieTest.setDomain("sub.localhost");
+    //cookieTest.setPath("/home");
 
-        document.cookie = "name=oeschger; SameSite=None; Secure";
-        document.cookie = "favorite_food=tripe; SameSite=None; Secure";
-        
-        console.log(document.cookie);
-    }
+    console.log(document.cookie);
+}
 
-    get();
-    function get() {
-        let cookies = document.cookie;
-
-        let cookieList = cookies.split(";");
-        
-        for(i = 0; i < cookieList.length; i++) {
-            console.log(i + ": " + cookieList[i].substring(0, cookieList[i].indexOf("=")) + "  CookieList.lenght: " + cookieList.length);
-        }
+function changeCookie() {
+    let cookies = getCookies();
+    let cookie;
+    
+    for(i = 0; i < cookies.items.length; i++) {
+        console.log(i + ": " + cookies.items[i][0] + " » " + cookies.items[i][1]);
+        cookie = new Cookie(cookies.items[i][0]);
+        cookie.setValue("haha");
     }
 }
+
+function delCookies() {
+    let cookieTest = new Cookie("cookieTest");
+    cookieTest.delete();
+
+    console.log(document.cookie);
+}
+
+function jsonTest() {
+    let test = '{' +
+        '"highscore":[' +
+            '{' + 
+                '"name": "Sebastian",' +
+                '"score": 17,' +
+                '"time": "30m 23s"' +
+            '}' +
+        ']' +
+    '}';
+
+    let obj = JSON.parse(test);
+
+    let name = "Fabian";
+    let newScore = {"name":name,"score":25,"time":"25m 41s"};
+
+    obj.highscore.push(newScore);
+
+    console.log(test);
+    console.log(obj.countScores);
+    console.log(obj.highscore[0].name);
+    console.log(obj.highscore[1].name);
+
+    obj.highscore.pop();
+    console.log(obj.highscore);
+    
+}*/
