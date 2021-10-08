@@ -11,8 +11,30 @@ class Memory
     private $cardDuplicates;
     private $cardCount;
 
-    public function __construct($settings){
-session_start();
+    public function __construct($settings = NULL)
+    {
+        $this->initalize($settings);
+    }
+
+    private function initalize($settings)
+    {
+        if ($settings && $settings['game'] === 'continue') {
+            $pairCount = $settings['pairCount'];
+            $cardDuplicates = $settings['cardDuplicates'];
+            $cards = $settings['cards'];
+
+            $this->rebuildGame($pairCount, $cardDuplicates, $cards);
+        } else {
+            $pairCount = NULL;
+            $cardDuplicates = NULL;
+
+            if ($settings && $settings['game'] === 'new') {
+                $pairCount = $settings['pairCount'];
+                $cardDuplicates = $settings['cardDuplicates'];
+            }
+
+            $this->startNewGame($pairCount, $cardDuplicates);
+        }
     }
 
     public function startNewGame(int $pairCount = 8, int $cardDuplicates = 2)
@@ -34,8 +56,6 @@ session_start();
             $card = new Card($card['cardCode'], $card['cardId']);
             $this->cards[$card->getCardId()] = $card;
         }
-
-
     }
 
     private function createCards()

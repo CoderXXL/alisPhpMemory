@@ -22,10 +22,7 @@ class Memory {
             return;
         }
 
-        console.log('i was clicked' + target.id);
-        
 
-    
         this.getCardPairCode(target.id).then(
             function(jsonResponse){
                 const response = JSON.parse(jsonResponse);

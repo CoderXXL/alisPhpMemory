@@ -16,38 +16,35 @@
 
     session_start();
 
-    $memory = new Memory();
-
+    // create settings or get from session
     if (!isset($_SESSION['memory'])) {
         $pairCount = 2;
         $cardDuplicates = 2;
 
-        $memory->startNewGame($pairCount, $cardDuplicates);
-
         $settings = [
+            'game' => 'new',
             'pairCount' => $pairCount,
             'cardDuplicates' => $cardDuplicates,
             'cards' => []
         ];
+    } else {
+        $settings = $_SESSION['memory'];
+        $settings['game'] = 'continue';
+    }
 
+    // intialize game
+    $memory = new Memory($settings);
+
+    // pass settings to session
+    if ($settings['game'] === 'new') {
         foreach ($memory->getCards() as $card) {
             $settings['cards'][] = [
                 'cardId' => $card->getCardId(),
                 'cardCode' => $card->getCardCode()
             ];
         }
-
-        $_SESSION['memory'] = $settings;
-
-    } else {
-        $settings = $_SESSION['memory'];
-
-        $pairCount = $settings['pairCount'];
-        $cardDuplicates = $settings['cardDuplicates'];
-        $cards = $settings['cards'];
-
-        $memory->rebuildGame($pairCount, $cardDuplicates, $cards);
     }
+    $_SESSION['memory'] = $settings;
 
 
     $playCards = $memory->getCards();
