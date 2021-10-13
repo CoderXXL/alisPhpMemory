@@ -271,12 +271,12 @@ function stop() {
 
     if (game.getPlayerOne().getPoints() > game.getPlayerTwo().getPoints()) {
         /* Spieler 1 gewinnt */
-        saveHighscore(game.getPlayerOne().getName(), game.getPlayerOne().getPoints(), game.getNumberCouples(), "33m 54s");
+        saveHighscore(game.getPlayerOne().getName(), game.getPlayerOne().getPoints(), game.getNumberCouples(), game.getTimer());
         console.log(msg.gameWin(game.getActivePlayer().getName()));
 
     } else if (game.getPlayerOne().getPoints() < game.getPlayerTwo().getPoints()) {
         /* Spieler 2 gewinnt */
-        saveHighscore(game.getPlayerTwo().getName(), game.getPlayerTwo().getPoints(), game.getNumberCouples(), "14m 32s");
+        saveHighscore(game.getPlayerTwo().getName(), game.getPlayerTwo().getPoints(), game.getNumberCouples(), game.getTimer());
         console.log(msg.gameWin(game.getActivePlayer().getName()));
 
     } else {
@@ -296,7 +296,14 @@ function stop() {
     }, 2000);
 }
 
-function saveHighscore(name, score, couples, time) {
+function saveHighscore(name, score, couples, timer) {
+
+    let time;
+    if (timer[2] == 0) {
+        time =  timer[1] + "m" + timer[0] + "s";
+    } else {
+        time =  timer[2] + "h" + timer[1] + "m" + timer[0] + "s";
+    }
 
     let newScore = {"name":name,"score":score,"couples":couples,"time":time};
     let cookie = new Cookie("highscore");
@@ -333,6 +340,9 @@ function saveHighscore(name, score, couples, time) {
     /* sort highscore array */
     function sort(obj) {
         let save;
+        let hOne, hTwo;
+        let mOne, mTwo;
+        let sOne, sTwo;
 
         for (let i = 0; i < obj.highscore.length - 1; i++) {
 
@@ -345,23 +355,45 @@ function saveHighscore(name, score, couples, time) {
             } else if (obj.highscore[i].couples == obj.highscore[i+1].couples) {
 
                 if (obj.highscore[i].score < obj.highscore[i+1].score) {
-                    save = obj.highscore[i];
-                    obj.highscore[i] = obj.highscore[i+1];
-                    obj.highscore[i+1] = save;
+                    
                     i = -1;
 
                 } else if (obj.highscore[i].score == obj.highscore[i+1].score) {
-                    //vergleiche Zeit
+                    hOne = obj.highscore[i].time.substring(0, obj.highscore[i].time.indexOf("h"));
+                    hTwo = obj.highscore[i + 1].time.substring(0, obj.highscore[i + 1].time.indexOf("h"));
 
-                } else {
-                    //nichts
+                    console.log("hOne: " + hOne + " | hTwo: " + hTwo)
+                    if (hOne > hTwo) {
+                        save = obj.highscore[i];
+                        obj.highscore[i] = obj.highscore[i+1];
+                        obj.highscore[i+1] = save;
+
+                    } else if (hOne == hTwo) {
+                        mOne = obj.highscore[i].time.substring(obj.highscore[i].time.indexOf("h") + 1, obj.highscore[i].time.indexOf("m"));
+                        mTwo = obj.highscore[i + 1].time.substring(obj.highscore[i].time.indexOf("h") + 1, obj.highscore[i + 1].time.indexOf("m"));
+
+                        console.log("mOne: " + mOne + " | mTwo: " + mTwo)
+                        if (mOne > mTwo) {
+                            save = obj.highscore[i];
+                            obj.highscore[i] = obj.highscore[i+1];
+                            obj.highscore[i+1] = save;
+    
+                        } else if (mOne == mTwo) {
+                            sOne = obj.highscore[i].time.substring(obj.highscore[i].time.indexOf("m") + 1, obj.highscore[i].time.indexOf("s"));
+                            sTwo = obj.highscore[i + 1].time.substring(obj.highscore[i].time.indexOf("m") + 1, obj.highscore[i + 1].time.indexOf("s"));
+
+                            console.log("sOne: " + sOne + " | sTwo: " + sTwo)
+                            if (sOne > sTwo) {
+                                save = obj.highscore[i];
+                                obj.highscore[i] = obj.highscore[i+1];
+                                obj.highscore[i+1] = save;
+    
+                            }
+                        }
+                    }
                 }
-
-            } else {
-                //nichts
             }
         }
-
         return obj;
     }
 }
@@ -390,13 +422,15 @@ function printHighscore() {
     function print() {
         obj = JSON.parse(highscore);
     
-        highscore = "Highscore:\n======================\n\n";
+        highscore = "Highscore\n======================\n\n";
 
         for (let i = 0; i < obj.highscore.length; i++) {
             highscore += "Platz "+ (i + 1) + ":\n\n" +
                          "Name: " + obj.highscore[i].name + "\n" +
-                         "Punkte: " + obj.highscore[i].score + "\n" + 
-                         "Anzahl Kartenpaare: " + obj.highscore[i].couples + "\n\n\n";
+                         "Anzahl Kartenpaare: " + obj.highscore[i].couples + "\n" + 
+                         "Punkte: " + obj.highscore[i].score + "\n" +
+                         "Zeit: " + obj.highscore[i].time + "\n\n\n";
+
         }
     }
 

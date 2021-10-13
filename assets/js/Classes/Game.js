@@ -9,6 +9,7 @@ class Game {
     #cardTwo;
 
     #interval;
+    #timer = [0, 0, 0];
 
     /* 
         Status 0: Spielbeginn
@@ -92,31 +93,27 @@ class Game {
     }
 
     #timerControl() {
-        let second = 0;
-        let minute = 0;
-        let hour = 0;
-    
         let timerElement = document.getElementById("timer");
-    
+        let timer = this.#timer;
         let timerMsg = "";
 
         this.#interval = setInterval(function() {
-            second++;
+            timer[0] = timer[0] + 1 ;
 
-            if (second == 60) {
-                minute++;
-                second = 0;
+            if (timer[0] == 60) {
+                timer[1] = timer[1] + 1;
+                timer[0] = 0;
             }
 
-            if (minute == 60) {
-                hour++;
-                minute = 0;
+            if (timer[1] == 60) {
+                timer[2] = timer[2] + 1;
+                timer[1] = 0;
             }
 
-            if (hour > 0) {
-                timerMsg = msg.gameTime + " " + hour + " " + msg.hours + " " + minute + " " + msg.minutes + " " + second + " " + msg.seconds;
+            if (timer[2] > 0) {
+                timerMsg = msg.gameTime + " " + timer[2] + "" + msg.hours + " " + timer[1] + "" + msg.minutes + " " + timer[0] + "" + msg.seconds;
             } else {
-                timerMsg = msg.gameTime + " " + minute + " " + msg.minutes + " " + second + " " + msg.seconds;
+                timerMsg = msg.gameTime + " " + timer[1] + "" + msg.minutes + " " + timer[0] + "" + msg.seconds;
             }
 
             timerElement.innerHTML = timerMsg;
@@ -125,6 +122,10 @@ class Game {
 
     startTimer() {
         this.#timerControl();
+    }
+
+    getTimer() {
+        return this.#timer;
     }
 
     endTimer() {

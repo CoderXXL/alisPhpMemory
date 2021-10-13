@@ -143,7 +143,7 @@ function memoryController() {
 
         htmlElement = document.getElementById("winningPlayer");
         htmlElement.innerHTML = msg.gameWinInfo(game.getPlayerOne());
-        htmlElement.innerHTML += htmlElement.value + "\n\n" + msg.gameWinInfo(game.getPlayerTwo());
+        htmlElement.innerHTML += "\n\n" + msg.gameWinInfo(game.getPlayerTwo());
         value = htmlElement.innerHTML;
         value = value.replaceAll("\n", "<br>");
         htmlElement.innerHTML = value;
