@@ -19,7 +19,7 @@ function start(cards) {
     cardColors();
 
     /* start game time */
-    timer();
+    game.startTimer();
 
     /* game info */
     game.changePlayer();
@@ -177,44 +177,6 @@ function cardColors() {
     }
 }
 
-function timer() {
-    let second = 0;
-    let minute = 0;
-    let hour = 0;
-
-    let timerElement = document.getElementById("timer");
-    let interval;
-
-    let timerMsg = "";
-
-    startTimer(interval);
-
-    function startTimer(interval){
-        interval = setInterval(function() {
-                if (game.getStatus() == 4) clearInterval(interval);
-
-                second++;
-
-                if(second == 60){
-                    minute++;
-                    second = 0;
-                }
-                if(minute == 60){
-                    hour++;
-                    minute = 0;
-                }
-
-                if (hour > 0) {
-                    timerMsg = msg.gameTime + " " + hour + " " + msg.hours + " " + minute + " " + msg.minutes + " " + second + " " + msg.seconds;
-                } else {
-                    timerMsg = msg.gameTime + " " + minute + " " + msg.minutes + " " + second + " " + msg.seconds;
-                }
-
-                timerElement.innerHTML = timerMsg;
-        },1000);
-    }
-}
-
 /*
 
 card click
@@ -323,6 +285,8 @@ function stop() {
 
     }
 
+    game.endTimer();
+
     console.log(msg.gameWinInfo(game.getPlayerOne()));
     console.log(msg.gameWinInfo(game.getPlayerTwo()));    
 }
@@ -358,43 +322,38 @@ function saveHighscore(name, score, couples, time) {
     }
 
     /* set cookie */
-    cookie.setMaxAge("31536000");
     cookie.setValue(JSON.stringify(obj));
+    cookie.setMaxAge("31536000");
 
     /* sort highscore array */
     function sort(obj) {
         let save;
 
         for (let i = 0; i < obj.highscore.length - 1; i++) {
-            console.log("couples - 1: " + obj.highscore[i].couples + " 2: " + obj.highscore[i+1].couples);
 
             if (obj.highscore[i].couples < obj.highscore[i+1].couples) {
-                console.log("<")
                 save = obj.highscore[i];
                 obj.highscore[i] = obj.highscore[i+1];
                 obj.highscore[i+1] = save;
                 i = -1;
 
             } else if (obj.highscore[i].couples == obj.highscore[i+1].couples) {
-                console.log("=")
-                console.log("score - 1: " + obj.highscore[i].score + " 2: " + obj.highscore[i+1].score);
 
                 if (obj.highscore[i].score < obj.highscore[i+1].score) {
-                    console.log("<")
                     save = obj.highscore[i];
                     obj.highscore[i] = obj.highscore[i+1];
                     obj.highscore[i+1] = save;
                     i = -1;
-                
+
                 } else if (obj.highscore[i].score == obj.highscore[i+1].score) {
-                    console.log("=")
+                    //vergleiche Zeit
 
                 } else {
-                    console.log(">")
+                    //nichts
                 }
 
             } else {
-                console.log(">")
+                //nichts
             }
         }
 

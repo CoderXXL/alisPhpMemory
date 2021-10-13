@@ -8,6 +8,8 @@ class Game {
     #cardOne;
     #cardTwo;
 
+    #interval;
+
     /* 
         Status 0: Spielbeginn
         Status 1: Spieler wählt Karte 1
@@ -22,6 +24,10 @@ class Game {
         this.#player[0] = playerOne;
         this.#player[1] = playerTwo;
         this.#numberCouples = numberCouples;
+    }
+
+    #getTest() {
+
     }
 
     getNumberCouples() {
@@ -83,5 +89,45 @@ class Game {
         }
 
         document.getElementById("activePlayer").innerHTML = "Akiver Spieler: " + game.getActivePlayer().getName();
+    }
+
+    #timerControl() {
+        let second = 0;
+        let minute = 0;
+        let hour = 0;
+    
+        let timerElement = document.getElementById("timer");
+    
+        let timerMsg = "";
+
+        this.#interval = setInterval(function() {
+            second++;
+
+            if (second == 60) {
+                minute++;
+                second = 0;
+            }
+
+            if (minute == 60) {
+                hour++;
+                minute = 0;
+            }
+
+            if (hour > 0) {
+                timerMsg = msg.gameTime + " " + hour + " " + msg.hours + " " + minute + " " + msg.minutes + " " + second + " " + msg.seconds;
+            } else {
+                timerMsg = msg.gameTime + " " + minute + " " + msg.minutes + " " + second + " " + msg.seconds;
+            }
+
+            timerElement.innerHTML = timerMsg;
+        },1000);
+    }
+
+    startTimer() {
+        this.#timerControl();
+    }
+
+    endTimer() {
+        clearInterval(this.#interval);
     }
 }
