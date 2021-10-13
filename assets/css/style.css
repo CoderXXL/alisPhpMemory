@@ -151,24 +151,6 @@ h1 {
   display: none;
 }
 
-.multiCounter {
-  width: auto;
-  background-color: grey;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  margin: 1rem 0;
-}
-
-.multiCounter h2 {
-  margin: auto;
-}
-
-.multiCounter #right,
-.multiCounter #wrong,
 .multiCounter #wrong2 {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -177,11 +159,9 @@ h1 {
   font-size: 2rem;
   background-color: red;
   border-radius: 2rem;
-  padding: 1rem;
+  padding: 0 1rem;
 }
 
-.multiCounter #right p,
-.multiCounter #wrong p,
 .multiCounter #wrong2 p {
   font-size: 2.5rem;
   margin: auto;

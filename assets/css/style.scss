@@ -126,25 +126,14 @@ h1 {
 }
 
 .multiCounter {
-    width: auto;
-    background-color: grey;
-    display: flex;
-    justify-content: center;
-    margin: 1rem 0;
 
-    h2 {
-        margin: auto;
-    }
-
-    #right,
-    #wrong,
     #wrong2{
         display: flex;
         margin: .5rem 5rem;
         font-size: 2rem;
         background-color: red;
         border-radius: 2rem;
-        padding: 1rem;
+        padding: 0 1rem;
 
         p {
             font-size: 2.5rem;
