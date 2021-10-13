@@ -37,13 +37,15 @@
         grid-column: 1 / -1;
         grid-row: 2 / 3;
 
-
-
         background-color: white;
 
         border-style: solid;
         border-width: 0px 20px;
         border-color: lightskyblue;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
     }
 
     /* Header */
@@ -61,6 +63,7 @@
     /* Start Form */
 
     #startForm {
+        grid-column: 1 / -1;
     }
 
     #playerName {
@@ -79,7 +82,30 @@
         border: none;
     }
 
+    /* end screen*/
+
+    #endScreen {
+        grid-column: 1 / -1;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+    }
+
+    #winningPlayer {
+        grid-column: 1 / 2;
+    }
+
+    #highscore {
+        grid-column: 2 / 3;
+    }
+
     /* Cards */
+
+    #cards {
+        grid-column: 1 / -1;
+        grid-row: 1 / -1;
+    }
     
     .card {
         background: lightskyblue;

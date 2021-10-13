@@ -272,12 +272,12 @@ function stop() {
     if (game.getPlayerOne().getPoints() > game.getPlayerTwo().getPoints()) {
         /* Spieler 1 gewinnt */
         saveHighscore(game.getPlayerOne().getName(), game.getPlayerOne().getPoints(), game.getNumberCouples(), "33m 54s");
-        console.log(msg.gameWin(game.getPlayerOne().getName()));
+        console.log(msg.gameWin(game.getActivePlayer().getName()));
 
     } else if (game.getPlayerOne().getPoints() < game.getPlayerTwo().getPoints()) {
         /* Spieler 2 gewinnt */
         saveHighscore(game.getPlayerTwo().getName(), game.getPlayerTwo().getPoints(), game.getNumberCouples(), "14m 32s");
-        console.log(msg.gameWin(game.getPlayerTwo().getName()));
+        console.log(msg.gameWin(game.getActivePlayer().getName()));
 
     } else {
         /* Unentschieden */
@@ -289,7 +289,11 @@ function stop() {
 
     console.log(msg.gameWinInfo(game.getPlayerOne()));
     console.log(msg.gameWinInfo(game.getPlayerTwo()));
-    printHighscore();
+    //printHighscore();
+
+    setTimeout(function() {
+        memoryController();
+    }, 2000);
 }
 
 function saveHighscore(name, score, couples, time) {
@@ -396,5 +400,8 @@ function printHighscore() {
         }
     }
 
-    console.log(highscore);
+    highscore = highscore.replaceAll("\n", "<br>");
+
+    let htmlElement = document.getElementById("highscore");
+    htmlElement.innerHTML = highscore;
 }

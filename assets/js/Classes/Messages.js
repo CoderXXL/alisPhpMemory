@@ -14,6 +14,8 @@ class message {
     setPlayerNameTwo = "Gebe den Namen für Spieler 2 ein:";
     countCouples = "Git die Anzahl der Kartenpaare ein (Zwischen 2 und 30):";
 
+    playAgain = "Spiel neustarten";
+
 
     playerPoints(player) {
         return "Punkte " + player.getName() + ": " + player.getPoints();;

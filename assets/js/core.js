@@ -2,7 +2,7 @@ window.onload = function() {
     const button = document.getElementById("startMemory");
 
     button.addEventListener("click", function () {
-        startMemory();
+        memoryController();
     });
 
     let form = document.getElementById("createGame");
@@ -11,10 +11,6 @@ window.onload = function() {
         event.preventDefault();
         document.getElementById("startMemory").click();
     });
-
-    //DEBUG
-    //eatSomeCookies();
-    //jsonTest();
 }
 
 function loadCards() {
@@ -51,9 +47,10 @@ let playerTwo;
 
 let game;
 
-function startMemory() {
+function memoryController() {
     let htmlElement;
-    let name = "";
+    let value;
+    let count;
 
     if (createGameStatus == 0) {
         
@@ -69,16 +66,13 @@ function startMemory() {
 
         createGameStatus++;
 
-        //DEBUG
-        //changeCookie();
-
     } else if (createGameStatus == 1) {
         htmlElement = document.getElementById("playerName");
-        let name = htmlElement.value;
+        value = htmlElement.value;
         
-        if (!name) return;
-        if(!checkName(name)) return;
-        if (name.length > 15)  return;
+        if (!value) return;
+        if(!checkName(value)) return;
+        if (value.length > 15)  return;
 
         playerOne = new Player(htmlElement.value);
         htmlElement.value = "";
@@ -90,11 +84,11 @@ function startMemory() {
 
     } else if (createGameStatus == 2) {
         htmlElement = document.getElementById("playerName");
-        let name = htmlElement.value;
+        value = htmlElement.value;
 
-        if (!name) return;
-        if(!checkName(name)) return;
-        if (name.length > 15) return;
+        if (!value) return;
+        if(!checkName(value)) return;
+        if (value.length > 15) return;
 
         playerTwo = new Player(htmlElement.value);
         htmlElement.value = "";
@@ -106,7 +100,7 @@ function startMemory() {
 
     } else if (createGameStatus == 3) {
         htmlElement = document.getElementById("playerName");
-        let count = parseInt(htmlElement.value);
+        count = parseInt(htmlElement.value);
         
         if (!Number.isInteger(count)) return;
         //if (count % 2 != 0) return;
@@ -130,7 +124,39 @@ function startMemory() {
 
         game = new Game(playerOne, playerTwo, count);
 
+        createGameStatus++;
         loadCards();
+
+    } else if (createGameStatus == 4) {
+        htmlElement = document.getElementById("startForm");
+        htmlElement.classList.replace("hide", "show");
+        
+        htmlElement = document.getElementById("startMemory");
+        htmlElement.innerHTML = msg.playAgain;
+
+        htmlElement = document.getElementById("createGameText");
+        htmlElement.innerHTML = msg.gameWin(game.getActivePlayer().getName());
+        htmlElement.classList.replace("hide", "show");
+
+        htmlElement = document.getElementById("cards");
+        htmlElement.classList.replace("show", "hide");
+
+        htmlElement = document.getElementById("winningPlayer");
+        htmlElement.innerHTML = msg.gameWinInfo(game.getPlayerOne());
+        htmlElement.innerHTML += htmlElement.value + "\n\n" + msg.gameWinInfo(game.getPlayerTwo());
+        value = htmlElement.innerHTML;
+        value = value.replaceAll("\n", "<br>");
+        htmlElement.innerHTML = value;
+        htmlElement.classList.replace("hide", "show");
+
+        htmlElement = document.getElementById("highscore");
+        printHighscore();
+        htmlElement.classList.replace("hide", "show");
+
+        createGameStatus++;
+    
+    } else if (createGameStatus == 5) {
+        location.reload();
     }
 
     function checkName(name) {
@@ -141,66 +167,3 @@ function startMemory() {
         return true;
     }
 }
-
-
-/*function eatSomeCookies() {
-    document.cookie = "cookie=test; max-age=31536000; Secure";
-
-    let date = new Date();
-    date = new Date(date.getTime() + 60*60*24*365);
-
-    let cookieTest = new Cookie("cookieTest");
-    cookieTest.setValue("Schokolade");
-    //cookieTest.setMaxAge("31536000");
-    cookieTest.setExpires(date.toUTCString());
-    cookieTest.setDomain("sub.localhost");
-    //cookieTest.setPath("/home");
-
-    console.log(document.cookie);
-}
-
-function changeCookie() {
-    let cookies = getCookies();
-    let cookie;
-    
-    for(i = 0; i < cookies.items.length; i++) {
-        console.log(i + ": " + cookies.items[i][0] + " » " + cookies.items[i][1]);
-        cookie = new Cookie(cookies.items[i][0]);
-        cookie.setValue("haha");
-    }
-}
-
-function delCookies() {
-    let cookieTest = new Cookie("cookieTest");
-    cookieTest.delete();
-
-    console.log(document.cookie);
-}
-
-function jsonTest() {
-    let test = '{' +
-        '"highscore":[' +
-            '{' + 
-                '"name": "Sebastian",' +
-                '"score": 17,' +
-                '"time": "30m 23s"' +
-            '}' +
-        ']' +
-    '}';
-
-    let obj = JSON.parse(test);
-
-    let name = "Fabian";
-    let newScore = {"name":name,"score":25,"time":"25m 41s"};
-
-    obj.highscore.push(newScore);
-
-    console.log(test);
-    console.log(obj.countScores);
-    console.log(obj.highscore[0].name);
-    console.log(obj.highscore[1].name);
-
-    obj.highscore.pop();
-    console.log(obj.highscore);
-    
-}*/
