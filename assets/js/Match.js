@@ -288,7 +288,8 @@ function stop() {
     game.endTimer();
 
     console.log(msg.gameWinInfo(game.getPlayerOne()));
-    console.log(msg.gameWinInfo(game.getPlayerTwo()));    
+    console.log(msg.gameWinInfo(game.getPlayerTwo()));
+    printHighscore();
 }
 
 function saveHighscore(name, score, couples, time) {
@@ -301,7 +302,7 @@ function saveHighscore(name, score, couples, time) {
     if (hasCookie("highscore")) {
         let cookies = getCookies();
     
-        for(let i = 0; i < cookies.items.length; i++) {
+        for (let i = 0; i < cookies.items.length; i++) {
             if (cookies.items[i][0] == "highscore") {
                 highscore = cookies.items[i][1];
                 i = cookies.items.length;
@@ -359,4 +360,41 @@ function saveHighscore(name, score, couples, time) {
 
         return obj;
     }
+}
+
+function printHighscore() {
+    let cookie = new Cookie("highscore");
+    let highscore;
+    let obj;
+
+    if (hasCookie("highscore")) {
+        let cookies = getCookies();
+    
+        for (let i = 0; i < cookies.items.length; i++) {
+            if (cookies.items[i][0] == "highscore") {
+                highscore = cookies.items[i][1];
+                i = cookies.items.length;
+            }
+        }
+
+        print();
+    
+    } else {
+        highscore = "Es gibt noch keinen Highscore!";
+    }
+
+    function print() {
+        obj = JSON.parse(highscore);
+    
+        highscore = "Highscore:\n======================\n\n";
+
+        for (let i = 0; i < obj.highscore.length; i++) {
+            highscore += "Platz "+ (i + 1) + ":\n\n" +
+                         "Name: " + obj.highscore[i].name + "\n" +
+                         "Punkte: " + obj.highscore[i].score + "\n" + 
+                         "Anzahl Kartenpaare: " + obj.highscore[i].couples + "\n\n\n";
+        }
+    }
+
+    console.log(highscore);
 }
